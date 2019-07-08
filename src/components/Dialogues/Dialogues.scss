@@ -1,0 +1,25 @@
+.dialogues {
+  display: flex;
+  width: 1000px;
+  height: 600px;
+  background-color: #090F1A;
+  margin: 200px auto;
+  justify-content: center;
+
+  &__panel {
+    width: 7%;
+    height: 100%;
+  }
+
+  &__information {
+    background-color: #131A2B;
+    width: 30%;
+    height: 100%;
+  }
+
+  &__dialogue {
+    background-color: #131A2B;
+    width: 63%;
+    height: 100%;
+  }
+}
