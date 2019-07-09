@@ -15,7 +15,10 @@
     ],
     ["@babel/plugin-proposal-class-properties",
       { "loose": true }
-    ]
+    ],
+    ["transform-runtime", {
+      "regenerator": true
+    }]
   ],
   "env": {
     "test": {
