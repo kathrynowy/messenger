@@ -38,7 +38,7 @@ class DialoguesComponent extends Component<AllProps> {
         <div className="dialogues__information">
           <Message text='Приветик' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
           <Message text='ok' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message text='Приветикgfhgfhgfhfghfghfghfgh' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
+          <Message text='Приветикgfhgfhgfhfghretertertertertertertertfgdfgdgdfghfghfgh' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
           <Message text='Приветик' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
           <Message text='Приветик' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
           <Message text='Приветик' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
