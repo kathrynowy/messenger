@@ -1,5 +1,5 @@
 import { all, /* call, */ fork, put, takeEvery } from 'redux-saga/effects'
-import { UsersActionTypes } from './types'
+import { MessagesActionTypes } from './types'
 import { fetchError, fetchSuccess } from './actions'
 /* import { callApi } from '../../utils/api' */
 
@@ -10,8 +10,10 @@ function* handleFetch() {
     /* const res = yield call(callApi, 'get', API_ENDPOINT, '/heroStats') */
     const res = [{
       id: 1,
-      name: 'Jane Doe',
-      avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK'
+      text: 'Jane Dgfdgdfgdfgoe',
+      fromId: 1,
+      toId: 2,
+      date: 416516164
     }]
 
    /*  if (res.error) {
@@ -30,12 +32,12 @@ function* handleFetch() {
 
 
 function* watchFetchRequest() {
-  yield takeEvery(UsersActionTypes.FETCH_REQUEST, handleFetch)
+  yield takeEvery(MessagesActionTypes.FETCH_REQUEST, handleFetch)
 }
 
-function* usersSaga() {
+function* messagesSaga() {
   yield all([fork(watchFetchRequest)])
 }
 
 
-export { usersSaga }
+export { messagesSaga }

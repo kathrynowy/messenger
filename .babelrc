@@ -14,11 +14,12 @@
       }
     ],
     ["@babel/plugin-proposal-class-properties",
-      { "loose": true }
+      {
+        "loose": true
+      }
     ],
-    ["transform-runtime", {
-      "regenerator": true
-    }]
+    ["babel-plugin-add-module-exports"],
+    ["@babel/plugin-transform-runtime"]
   ],
   "env": {
     "test": {

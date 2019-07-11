@@ -8,7 +8,6 @@ export const initialState: UsersState = {
   loading: false
 }
 
-
 const reducer: Reducer<UsersState> = (state = initialState, action) => {
   switch (action.type) {
     case UsersActionTypes.FETCH_REQUEST: {

@@ -1,9 +1,7 @@
 export interface User extends ApiResponse {
   id: number
   name: string
-  email: string
-  img: string
-  birthday: number
+  avatar: string
 }
 
 export type ApiResponse = Record<string, any>
@@ -14,7 +12,6 @@ export enum UsersActionTypes {
   FETCH_ERROR = '@@users/FETCH_ERROR',
   GET_USER = '@@users/GET_USER',
 }
-
 
 export interface UsersState {
   readonly loading: boolean

@@ -9,17 +9,19 @@
   &__panel {
     width: 7%;
     height: 100%;
+    color: red;
   }
 
   &__information {
     background-color: #131A2B;
-    width: 30%;
-    height: 100%;
+    width: 50%;
+    padding: 10px;
+    overflow: auto;
   }
 
   &__dialogue {
     background-color: #131A2B;
-    width: 63%;
+    width: 20%;
     height: 100%;
   }
 }

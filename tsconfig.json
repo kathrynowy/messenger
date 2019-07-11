@@ -15,7 +15,9 @@
     "typeRoots": ["node_modules/@types"], 
     "baseUrl": ".",
     "moduleResolution": "node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
   },
   "include": ["./src/**/*.ts", "src/index.tsx"],
   "exclude": ["node_modules"]

@@ -1,0 +1,43 @@
+.message {
+  width: 100%;
+  background: transparent;
+  max-height: 200px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    min-height: 70px;
+    min-width: 70px;
+  }
+
+  &__avatar {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+  }
+
+  &__text {
+    background: linear-gradient(to right, #ff9e5c, #ff5c58, #ff3455);
+    min-height: 40px;
+    padding: 5px 15px;
+    color: #ffd9d1;
+    font-size: 20px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px;
+  }
+
+  &__date {
+    color: #565d71;
+    font-size: 16px;
+    display: flex;
+    align-self: flex-end;
+  }
+}
