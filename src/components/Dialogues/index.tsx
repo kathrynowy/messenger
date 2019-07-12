@@ -8,7 +8,8 @@ import {fetchRequest} from '../../store/users/actions'
 /* import { Dispatch } from 'redux' */
 import './index.scss';
 
-import {Message} from '../Message';
+import { Message } from '../Message';
+import { Dialogue } from '../Dialogue';
 
 
 interface PropsFromState {
@@ -34,17 +35,24 @@ class DialoguesComponent extends Component<AllProps> {
 
     return (
       <div className="dialogues">
-        <div className="dialogues__panel"></div>
+        <div className="dialogues__panel">
+        </div>
         <div className="dialogues__information">
-          <Message text='Приветик' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message text='ok' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message text='Приветикgfhgfhgfhfghretertertertertertertertfgdfgdgdfghfghfgh' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message text='Приветик' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message text='Приветик' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message text='Приветик' date={15616546}  avatar={data.length ? data[0].avatar : ''} /> 
+          <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+          <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+          <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+          <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+          <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
         
         </div>
-        <div className="dialogues__dialogue"> </div>
+        <div className="dialogues__dialogue">
+        <Message isAuthor={true} text='Hi there!' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+          <Message isAuthor={false} text='Hey' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+          <Message isAuthor={true} text='gfhgfhgfhfghretertdfgddgffgdgfgfdgdfgdfgdfgdgfertertertertertertfgdfgdgdfghfghfgh' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+          <Message isAuthor={false} text='How are you doing?' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+          <Message isAuthor={true} text='Great, thx. What about u?' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+          <Message isAuthor={true} text="I'm fine" date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+        </div>
      </div>
     );
   }

@@ -1,0 +1,42 @@
+.dialogue {
+  display: flex;
+  height: 65px;
+  background-color: #0b1222;
+  margin: 15px 0;
+  flex-direction: row;
+  padding: 15px;
+  border-radius: 5px;
+
+  &:hover {
+    background: linear-gradient(150deg, #f82d5a, #bc2696, #811fce);
+  }
+
+  &__avatar {
+    height: 45px;
+    width: 45px;
+    border-radius: 100%;
+    margin-right: 10px;
+    padding-top: 5px;
+  }
+
+  &__info {
+    flex-direction: column;
+    width: 75%;
+  }
+
+  &__text {
+    color: #a8acb4;
+    font-size: 18px;
+  }
+
+  &__name {
+    font-size: 20px;
+    color: #dee2e9;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  &__date{
+    color: #c2c4c9;
+  }
+}
