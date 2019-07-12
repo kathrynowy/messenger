@@ -20,12 +20,12 @@ class Dialogue extends Component<PropsFromContainer> {
       <div className="dialogue">
         <img className="dialogue__avatar" src={avatar}/>
 
-        <div className="dialogue__info">
+        <div className="dialogue__msg-info">
           <div className="dialogue__name">{name}</div>
           <div className="dialogue__text">{text}</div>
         </div>
 
-        <div>
+        <div div className="dialogue__info">
           <div className="dialogue__date">12:38 AM</div>
           <div className="dialogue__count">{count}</div>
         </div>

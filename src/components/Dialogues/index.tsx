@@ -5,17 +5,45 @@ import { connect } from 'react-redux'
 import { User } from 'src/store/users/types';
 import { ApplicationState, ConnectedReduxProps } from 'src/store';
 import {fetchRequest} from '../../store/users/actions'
-/* import { Dispatch } from 'redux' */
+import Search from '@material-ui/icons/Search';
+import { withStyles } from '@material-ui/core/styles';
 import './index.scss';
 
 import { Message } from '../Message';
 import { Dialogue } from '../Dialogue';
 
+const styles = theme => ({
+  root: {
+    width: '100%',
+    width: 220,
+    backgroundColor: theme.palette.background.paper,
+    zIndex: 0,
+    position: 'static',
+    [theme.breakpoints.between('xs', 'sm')]: {
+      width: 300
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: 200,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 220,
+    },
 
+  },
+  nested: {
+    paddingLeft: theme.spacing.unit * 4,
+  },
+  icon: {
+    color: '#a1b1cc',
+    padding: '5px 10px',
+    margin: '8px 0'
+  }
+});
 interface PropsFromState {
   loading: boolean
   data: User[]
   errors?: string
+  classes: any
 }
 
 interface PropsFromDispatch {
@@ -25,21 +53,27 @@ interface PropsFromDispatch {
 type AllProps = PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps
 
 
+
 class DialoguesComponent extends Component<AllProps> {
   public componentDidMount() {
     this.props.fetchRequest();
   }
 
   public render() {
-    const { data } = this.props;
+    const { data, classes } = this.props;
 
     return (
       <div className="dialogues">
         <div className="dialogues__panel">
         </div>
         <div className="dialogues__information">
+          <div className="dialogues__search search">
+            <Search className={classes.icon}/>
+            <input type="text" className="search__input" placeholder="Search in your inbox..."/>
+          </div>
+
           <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
-          <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+          <Dialogue text="gfhgfhfghghdgfhdgfhdfghfdghfhdfgdgdsfgdsgdsfgdsfgdsfgfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
           <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
           <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
           <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
@@ -69,7 +103,7 @@ const mapDispatchToProps = {
 }
 
 
-export const Dialogues = connect(
+export const Dialogues = withStyles(styles)(connect(
   mapStateToProps,
   mapDispatchToProps
-)(DialoguesComponent); 
+)(DialoguesComponent)); 

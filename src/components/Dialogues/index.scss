@@ -1,7 +1,8 @@
 .dialogues {
   display: flex;
-  width: 1000px;
-  height: 700px;
+  max-width: 1200px;
+  width: 70%;
+  height: 750px;
   background-color: #090F1A;
   margin: 200px auto;
   justify-content: center;
@@ -14,16 +15,44 @@
 
   &__information {
     background-color: #131A2B;
-    width: 35%;
+    width: 34%;
     padding: 10px;
     overflow: auto;
-    padding-top: 30px;
+    padding-top: 15px;
+
+    .search {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      &__input {
+        background-color: transparent;
+        border: none;
+        padding: 5px 10px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        font-size: 20px;
+        color: #a1b1cc;
+        border-left: 2px #a1b1cc solid;
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+
+        &:focus {
+          outline: none;
+        }
+    
+        &::placeholder {
+          color: #a1b1cc;
+        }
+      }
+    }
   }
 
   &__dialogue {
     background-color: #131A2B;
-    width: 55%;
+    width: 50%;
     overflow: auto;
-    padding: 30px;
+    padding: 20px;
   }
+  
+  
 }

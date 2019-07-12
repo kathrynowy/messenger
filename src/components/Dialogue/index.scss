@@ -1,11 +1,13 @@
 .dialogue {
   display: flex;
-  height: 65px;
+  height: 70px;
   background-color: #0b1222;
   margin: 15px 0;
   flex-direction: row;
-  padding: 15px;
+  padding: 15px 10px;
   border-radius: 5px;
+  padding-top: 20px;
+  cursor: pointer;
 
   &:hover {
     background: linear-gradient(150deg, #f82d5a, #bc2696, #811fce);
@@ -19,14 +21,20 @@
     padding-top: 5px;
   }
 
-  &__info {
+  &__msg-info {
     flex-direction: column;
     width: 75%;
+    max-width: 200px;
+    margin-right: 10px;
   }
 
   &__text {
-    color: #a8acb4;
+    color: #b7c3d8;
     font-size: 18px;
+    word-break: break-word;
+    max-height: 36px;
+    overflow: hidden;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
   }
 
   &__name {
@@ -34,9 +42,34 @@
     color: #dee2e9;
     margin-bottom: 10px;
     font-weight: 600;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    //font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   }
 
   &__date{
     color: #c2c4c9;
+    align-content: flex-end;
+    font-weight: 600;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+  }
+
+  &__count {
+    color: #d6d9e2;
+    margin-top: 10%;
+    display: flex;
+    align-self: center;
+    margin-top: 25%;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(150deg, #f82d5a, #bc2696, #811fce);
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
 }
