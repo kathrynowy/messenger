@@ -7,6 +7,7 @@ import { ApplicationState, ConnectedReduxProps } from 'src/store';
 import {fetchRequest} from '../../store/users/actions'
 import Search from '@material-ui/icons/Search';
 import Send from '@material-ui/icons/SendOutlined';
+import Settings from '@material-ui/icons/Settings';
 import Sentiment from '@material-ui/icons/SentimentSatisfiedAltOutlined';
 import { withStyles } from '@material-ui/core/styles';
 import './index.scss';
@@ -64,8 +65,15 @@ class DialoguesComponent extends Component<AllProps> {
 
     return (
       <div className="dialogues">
-        <div className="dialogues__panel">
+        <div className="dialogues__panel panel">
+          <div className="panel__user user">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK" className="user__avatar"/>
+            <span className="user__name">Alexa v</span>
+          </div>
+
+          <Settings className="panel__icon"/>
         </div>
+
         <div className="dialogues__information">
           <div className="dialogues__search search">
             <Search className={classes.icon}/>
@@ -82,6 +90,7 @@ class DialoguesComponent extends Component<AllProps> {
             <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
           </div>
         </div>
+
         <div className="dialogues__dialogue">
           <div className="dialogues__messages">
             <Message isAuthor={true} text='Hi there!' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
@@ -100,7 +109,6 @@ class DialoguesComponent extends Component<AllProps> {
             <input type="text" placeholder="Type a message..." className="message-input__input"/>
             <Send className="message-input__icon"/>
           </div>
-        
         </div>
      </div>
     );
