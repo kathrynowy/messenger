@@ -5,16 +5,14 @@ import './index.scss';
 
 interface PropsFromContainer {
   text: string
-  fromId: number,
   avatar: string,
   name: string,
-  date: number,
   count: number
 }
 
 class Dialogue extends Component<PropsFromContainer> {
   public render() {
-    const { text, avatar, name, date, count } = this.props;
+    const { text, avatar, name, count } = this.props;
 
     return (
       <div className="dialogue">
@@ -25,7 +23,7 @@ class Dialogue extends Component<PropsFromContainer> {
           <div className="dialogue__text">{text}</div>
         </div>
 
-        <div div className="dialogue__info">
+        <div className="dialogue__info">
           <div className="dialogue__date">12:38 AM</div>
           <div className="dialogue__count">{count}</div>
         </div>

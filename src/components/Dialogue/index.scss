@@ -1,12 +1,11 @@
 .dialogue {
   display: flex;
-  height: 70px;
+  height: 65px;
   background-color: #0b1222;
-  margin: 15px 0;
+  margin: 10px 0;
   flex-direction: row;
   padding: 15px 10px;
   border-radius: 5px;
-  padding-top: 20px;
   cursor: pointer;
 
   &:hover {
@@ -30,15 +29,16 @@
 
   &__text {
     color: #b7c3d8;
-    font-size: 18px;
+    font-size: 16px;
     word-break: break-word;
-    max-height: 36px;
+    max-height: 38px;
     overflow: hidden;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
+    line-height: 1.2;
   }
 
   &__name {
-    font-size: 20px;
+    font-size: 18px;
     color: #dee2e9;
     margin-bottom: 10px;
     font-weight: 600;
@@ -51,6 +51,7 @@
     align-content: flex-end;
     font-weight: 600;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 16px;
   }
 
   &__count {

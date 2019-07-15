@@ -1,10 +1,10 @@
 .dialogues {
   display: flex;
   max-width: 1200px;
-  width: 70%;
-  height: 750px;
+  width: 90%;
+  height: 650px;
   background-color: #090F1A;
-  margin: 200px auto;
+  margin: 20px auto;
   justify-content: center;
 
   &__panel {
@@ -13,12 +13,80 @@
     color: red;
   }
 
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+    flex-grow: 1;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 20px;
+      height: 20px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, .1);
+    }
+  }
+
+  .message-input {
+    display: flex;
+    height: 60px;
+    background-color: #090F1A;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15px;
+    flex-grow: 1;
+    min-height: 55px;
+
+    &__icon {
+      width: 30px;
+      height: 30px;
+      color: #a1b1cc;
+      font-weight: 300px;
+      cursor: pointer;
+    }
+
+    &__input {
+      background-color: transparent;
+      border: none;
+      padding: 5px 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      font-size: 18px;
+      color: #a1b1cc;
+      font-family: "Trebuchet MS", Helvetica, sans-serif;
+      width: 80%;
+
+      &:focus {
+        outline: none;
+      }
+  
+      &::placeholder {
+        color: #a1b1cc;
+      }
+    }
+  }
+
+  &__container {
+    &::-webkit-scrollbar {
+      width: 20px;
+      height: 20px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, .1);
+    }
+  }
+
   &__information {
     background-color: #131A2B;
-    width: 34%;
+    width: 35%;
     padding: 10px;
     overflow: auto;
     padding-top: 15px;
+    padding-right: 0px;
 
     .search {
       display: flex;
@@ -31,7 +99,7 @@
         padding: 5px 10px;
         margin: 8px 0;
         box-sizing: border-box;
-        font-size: 20px;
+        font-size: 18px;
         color: #a1b1cc;
         border-left: 2px #a1b1cc solid;
         font-family: "Trebuchet MS", Helvetica, sans-serif;
@@ -49,10 +117,9 @@
 
   &__dialogue {
     background-color: #131A2B;
-    width: 50%;
-    overflow: auto;
-    padding: 20px;
+    width: 57%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
   }
-  
-  
 }

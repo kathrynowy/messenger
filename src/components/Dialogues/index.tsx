@@ -6,6 +6,8 @@ import { User } from 'src/store/users/types';
 import { ApplicationState, ConnectedReduxProps } from 'src/store';
 import {fetchRequest} from '../../store/users/actions'
 import Search from '@material-ui/icons/Search';
+import Send from '@material-ui/icons/SendOutlined';
+import Sentiment from '@material-ui/icons/SentimentSatisfiedAltOutlined';
 import { withStyles } from '@material-ui/core/styles';
 import './index.scss';
 
@@ -14,7 +16,6 @@ import { Dialogue } from '../Dialogue';
 
 const styles = theme => ({
   root: {
-    width: '100%',
     width: 220,
     backgroundColor: theme.palette.background.paper,
     zIndex: 0,
@@ -28,7 +29,6 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       width: 220,
     },
-
   },
   nested: {
     paddingLeft: theme.spacing.unit * 4,
@@ -72,20 +72,35 @@ class DialoguesComponent extends Component<AllProps> {
             <input type="text" className="search__input" placeholder="Search in your inbox..."/>
           </div>
 
-          <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
-          <Dialogue text="gfhgfhfghghdgfhdgfhdfghfdghfhdfgdgdsfgdsgdsfgdsfgdsfgfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
-          <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
-          <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
-          <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
-        
+          <div className="dialogues__container">
+            <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+            <Dialogue text="gfhgfhfghghdgfhdgfhdfghfdghfhdfgdgdsfgdsgdsfgdsfgdsfgfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+            <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+            <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+            <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+            <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+            <Dialogue text="gfhgfhfghfg" name="Nancy J. Martins" count={6} avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"/>
+          </div>
         </div>
         <div className="dialogues__dialogue">
-        <Message isAuthor={true} text='Hi there!' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message isAuthor={false} text='Hey' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message isAuthor={true} text='gfhgfhgfhfghretertdfgddgffgdgfgfdgdfgdfgdfgdgfertertertertertertfgdfgdgdfghfghfgh' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message isAuthor={false} text='How are you doing?' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message isAuthor={true} text='Great, thx. What about u?' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
-          <Message isAuthor={true} text="I'm fine" date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+          <div className="dialogues__messages">
+            <Message isAuthor={true} text='Hi there!' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+            <Message isAuthor={false} text='Hey' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+            <Message isAuthor={true} text='gfhgfhgfhfghretertdfgddgffgdgfgfdgdfgdfgdfgdgfertertertertertertfgdfgdgdfghfghfgh' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+            <Message isAuthor={false} text='How are you doing?' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+            <Message isAuthor={true} text='Great, thx. What about u?' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+            <Message isAuthor={true} text="I'm fine" date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+            <Message isAuthor={false} text='How are you doing?' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+            <Message isAuthor={true} text='Great, thx. What about u?' date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+            <Message isAuthor={true} text="I'm fine" date={1}  avatar={data.length ? data[0].avatar : ''} /> 
+          </div>
+          
+          <div className="dialogues__message-input message-input">
+            <Sentiment className="message-input__icon"/>
+            <input type="text" placeholder="Type a message..." className="message-input__input"/>
+            <Send className="message-input__icon"/>
+          </div>
+        
         </div>
      </div>
     );
