@@ -7,7 +7,7 @@ import { fetchError, fetchSuccess } from './actions'
 function* handleFetch() {
   try {
     // To call async functions, use redux-saga's `call()`.
-    /* const res = yield call(callApi, 'get', API_ENDPOINT, '/heroStats') */
+   /*  const { data } = yield call(() => axios.get('http:/localhost:8000/message/'))); */
     const res = [{
       id: 1,
       text: 'Jane Dgfdgdfgdfgoe',
