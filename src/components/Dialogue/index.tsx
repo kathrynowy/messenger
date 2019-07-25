@@ -10,19 +10,21 @@ interface PropsFromContainer {
   count: number,
   dialogue: Dialogue,
   userId: string
+  isSelected: boolean
 }
 
 class DialogueComponent extends Component<PropsFromContainer> {
   public render() {
-    const { text, avatar, count, userId, dialogue } = this.props;
-    const username = dialogue.length ? userId === (dialogue.Between as any).To ? (dialogue.Between as any).From : (dialogue.Between as any).Between.To : ' No name';
+    const { text, avatar, count, userId, dialogue, isSelected } = this.props;
+    const username = userId === (dialogue.Between as any).To._id ? (dialogue.Between as any).From.Username : (dialogue.Between as any).Between.To.Username;
+
     return (
       <div className="dialogue">
         <img className="dialogue__avatar" src={avatar}/>
 
         <div className="dialogue__msg-info">
           <div className="dialogue__name">{username}</div>
-          <div className="dialogue__text">{text}</div>
+          <div className="dialogue__text">{isSelected ? '1' : '2'}</div>
         </div>
 
         <div className="dialogue__info">

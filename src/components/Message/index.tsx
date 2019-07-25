@@ -5,14 +5,14 @@ import './index.scss';
 
 interface PropsFromContainer {
   text: string
-  date: number,
+  time: number,
   avatar: string,
   isAuthor: boolean
 }
 
 class Message extends Component<PropsFromContainer> {
   public render() {
-    const { text, avatar, isAuthor } = this.props;
+    const { text, avatar, isAuthor, time } = this.props;
 
     return (
       <div className={`message ${isAuthor ? 'message_right' : 'message_left'}`}>
@@ -23,7 +23,11 @@ class Message extends Component<PropsFromContainer> {
             {text}
           </div>
 
-          <div className={`message__date ${isAuthor ? 'message__date_right' : 'message__date_left'}`}>09:15 AM</div>
+          <div className={`message__date ${isAuthor ? 'message__date_right' : 'message__date_left'}`}>
+          {
+            new Date(time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+          }
+          </div>
         </div>
      </div>
     );
