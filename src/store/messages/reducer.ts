@@ -10,7 +10,7 @@ export const initialState: MessagesState = {
 
 const reducer: Reducer<MessagesState> = (state = initialState, action) => {
   switch (action.type) {
-    case MessagesActionTypes.FETCH_REQUEST: {
+    case MessagesActionTypes.FETCH_MESSAGES: {
       return { ...state, loading: true }
     }
     case MessagesActionTypes.FETCH_SUCCESS: {

@@ -10,7 +10,7 @@ export const initialState: UsersState = {
 
 const reducer: Reducer<UsersState> = (state = initialState, action) => {
   switch (action.type) {
-    case UsersActionTypes.FETCH_REQUEST: {
+    case UsersActionTypes.GET_USER: {
       return { ...state, loading: true }
     }
     case UsersActionTypes.FETCH_SUCCESS: {

@@ -1,0 +1,76 @@
+.dialogue {
+  display: flex;
+  height: 65px;
+  background-color: #0b1222;
+  margin: 10px 0;
+  flex-direction: row;
+  padding: 15px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background: linear-gradient(150deg, #f82d5a, #bc2696, #811fce);
+  }
+
+  &__avatar {
+    height: 45px;
+    width: 45px;
+    border-radius: 100%;
+    margin-right: 10px;
+    padding-top: 5px;
+  }
+
+  &__msg-info {
+    flex-direction: column;
+    width: 75%;
+    max-width: 200px;
+    margin-right: 10px;
+  }
+
+  &__text {
+    color: #b7c3d8;
+    font-size: 16px;
+    word-break: break-word;
+    max-height: 38px;
+    overflow: hidden;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    line-height: 1.2;
+  }
+
+  &__name {
+    font-size: 18px;
+    color: #dee2e9;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    //font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  }
+
+  &__date{
+    color: #c2c4c9;
+    align-content: flex-end;
+    font-weight: 600;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 16px;
+  }
+
+  &__count {
+    color: #d6d9e2;
+    margin-top: 10%;
+    display: flex;
+    align-self: center;
+    margin-top: 25%;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(150deg, #f82d5a, #bc2696, #811fce);
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}

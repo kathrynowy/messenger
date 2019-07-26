@@ -9,16 +9,12 @@ function* handleFetch() {
     // To call async functions, use redux-saga's `call()`.
     /* const res = yield call(callApi, 'get', API_ENDPOINT, '/heroStats') */
     const res = [{
-      id: 1,
-      name: 'Jane Doe',
-      avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK'
+      Dialogues: ["5d308fccf3d6a151f00b9bfe"],
+      Username: "Katya",
+      UserId: 2
     }]
 
-   /*  if (res.error) {
-      yield put(fetchError(res.error))
-    } else { */
-      yield put(fetchSuccess(res))
-    /* } */
+    yield put(fetchSuccess(res))
   } catch (err) {
     if (err instanceof Error) {
       yield put(fetchError(err.stack!))

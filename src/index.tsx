@@ -5,7 +5,8 @@ import { createHashHistory } from 'history'
 import configureStore from './configureStore';
 import { App } from './App';
 import './index.scss';
-
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:8000');
 
 const initialState = window.initialReduxState
 const history = createHashHistory()
