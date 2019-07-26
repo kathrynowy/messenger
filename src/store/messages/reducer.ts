@@ -13,6 +13,12 @@ const reducer: Reducer<MessagesState> = (state = initialState, action) => {
     case MessagesActionTypes.FETCH_MESSAGES: {
       return { ...state, loading: true }
     }
+    case MessagesActionTypes.SEND_MESSAGE: {
+      return { ...state, loading: true }
+    }
+    case MessagesActionTypes.SEND_SUCCESS: {
+      return { ...state, loading: false, data: [...state.data, action.payload]}
+    }
     case MessagesActionTypes.FETCH_SUCCESS: {
       return { ...state, loading: false, data: action.payload }
     }
