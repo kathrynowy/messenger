@@ -3,14 +3,13 @@ import { MessagesActionTypes } from './types'
 import { fetchError, fetchSuccess, sendSuccess } from './actions'
 import axios from 'axios'
 import { AnyAction } from 'redux'
-import { func } from 'prop-types';
-/* import { callApi } from '../../utils/api' */
 
 
 function* handleFetch(actionData: AnyAction) {
   try {
     const { DialogueId } = actionData.payload;
     const { data } = yield call(() => axios.get(`http://localhost:8000/message/all?dialogueId=${DialogueId}`));
+
     yield put(fetchSuccess(data))
   } catch (err) {
     if (err instanceof Error) {
@@ -25,7 +24,6 @@ function* sendMessage(actionData: AnyAction) {
   try {
     const { dialogueId, text, userId } = actionData.payload;
     const time = new Date().getTime();
-    console.log('dialogueId ', dialogueId, 'text ', text, 'userId ', userId, 'time ', time);
     const { data } = yield call(() =>
       axios.post("http://localhost:8000/message/add", {
         Dialogue: dialogueId,
@@ -34,8 +32,6 @@ function* sendMessage(actionData: AnyAction) {
         Time: time
       }
     ));
-
-    console.log('data message', data);
 
     yield put(sendSuccess(data))
   } catch (err) {

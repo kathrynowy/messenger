@@ -68,12 +68,16 @@ interface State {
   userId: string
 }
 
-type AllProps = State & PropsFromState & PropsFromDispatch & RouteComponentProps<{}> & ConnectedReduxProps
+type AllProps = State &
+  PropsFromState &
+  PropsFromDispatch &
+  RouteComponentProps<{}> &
+  ConnectedReduxProps
 
 
 class DialoguesComponent extends Component<AllProps> {
     state = {
-      selected: '5d31c5980faa595c18d6121a',
+      selected: '',
       message: '',
       userId: localStorage.getItem('userId')
     }
@@ -84,7 +88,7 @@ class DialoguesComponent extends Component<AllProps> {
     const userId = localStorage.getItem('userId');
     this.props.fetchDialogues({ userId });
     this.props.fetchRequest();
-    this.props.fetchMessages({ DialogueId: this.state.selected });
+    this.state.selected ? this.props.fetchMessages({ DialogueId: this.state.selected }) : null;
     this.scrollToBottom();
   }
 
@@ -93,7 +97,7 @@ class DialoguesComponent extends Component<AllProps> {
       selected: dialogueId
     });
 
-    this.props.fetchMessages({ DialogueId: this.state.selected });
+    this.props.fetchMessages({ DialogueId: dialogueId });
   }
 
   public onTypeMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +107,6 @@ class DialoguesComponent extends Component<AllProps> {
   }
 
   public sendMessage = () => {
-    console.log('send ', this.state.message);
     this.setState({
       message: ''
     });
@@ -116,10 +119,12 @@ class DialoguesComponent extends Component<AllProps> {
   }
 
   public scrollToBottom = () => {
-    const scrollHeight = this.messagesEnd.scrollHeight;
-    const height = this.messagesEnd.clientHeight;
-    const maxScrollTop = scrollHeight - height;
-    this.messagesEnd.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+    if (this.state.selected) {
+      const scrollHeight = this.messagesEnd.scrollHeight;
+      const height = this.messagesEnd.clientHeight;
+      const maxScrollTop = scrollHeight - height;
+      this.messagesEnd.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+    }
   }
 
   componentDidUpdate() {
@@ -150,7 +155,7 @@ class DialoguesComponent extends Component<AllProps> {
           <div className="dialogues__container">
             {
               dialogues.data.map(dialogue =>
-                <DialogueComponent 
+                <DialogueComponent
                   key={dialogue.DialogueId}
                   userId={userId ? userId : '65'}
                   text="gfhgfhfghfg"
@@ -165,32 +170,46 @@ class DialoguesComponent extends Component<AllProps> {
           </div>
         </div>
 
-        <div className="dialogues__dialogue">
-          <div className="dialogues__messages" ref={div => this.messagesEnd = div}>
-            {
-              messages.data.map(message => 
-                <Message
-                  key={message._id}
-                  isAuthor={userId === message.User}
-                  text={message.Text}
-                  time={message.Time}
-                  avatar={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"} 
-                />
-              )
-            }
-          </div>
+        <div className="dialogues__dialogue-container">
+          {
+            this.state.selected && (
+              <div className="dialogues__dialogue">
+                
+                <div className="dialogues__messages" ref={div => this.messagesEnd = div}>
+                  {
+                    messages.data.map(message => 
+                      <Message
+                        key={message._id}
+                        isAuthor={userId === message.User}
+                        text={message.Text}
+                        time={message.Time}
+                        avatar={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"} 
+                      />
+                    )
+                  }
+                </div>
 
-          <div className="dialogues__message-input message-input">
-            <Sentiment className="message-input__icon"/>
-            <input
-              type="text"
-              placeholder="Type a message..."
-              className="message-input__input"
-              onChange={this.onTypeMessage}
-              value={this.state.message}
-            />
-            <Send className="message-input__icon" onClick={this.sendMessage}/>
-          </div>
+                <div className="dialogues__message-input message-input">
+                  <Sentiment className="message-input__icon"/>
+                  <input
+                    type="text"
+                    placeholder="Type a message..."
+                    className="message-input__input"
+                    onChange={this.onTypeMessage}
+                    value={this.state.message}
+                  />
+                  <Send className="message-input__icon" onClick={this.sendMessage}/>
+                </div>
+              </div>
+            )
+          }
+          {
+            !this.state.selected && (
+              <div className="dialogues_choose-dialogue">
+                Please select a chat to start messaging
+              </div>
+            )
+          }
         </div>
      </div>
     );

@@ -17,7 +17,9 @@ interface PropsFromContainer {
 class DialogueComponent extends Component<PropsFromContainer> {
   public render() {
     const { text, avatar, count, userId, dialogue, isSelected, onSelect } = this.props;
-    const username = userId === (dialogue.Between as any).To._id ? (dialogue.Between as any).From.Username : (dialogue.Between as any).Between.To.Username;
+    const to = (dialogue.Between as any).To;
+    const from = (dialogue.Between as any).From;
+    const username = (userId === to._id) ? from.Username : to.Username;
 
     return (
       <div className={isSelected ? "dialogue dialogue_selected" : "dialogue"} onClick={() => onSelect(dialogue._id)}>
@@ -38,4 +40,4 @@ class DialogueComponent extends Component<PropsFromContainer> {
 }
 
 
-export { DialogueComponent } 
+export { DialogueComponent }
