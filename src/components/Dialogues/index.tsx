@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useRef } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -7,7 +7,7 @@ import Search from "@material-ui/icons/Search";
 import Send from "@material-ui/icons/SendOutlined";
 import Sentiment from "@material-ui/icons/SentimentSatisfiedAltOutlined";
 import Settings from "@material-ui/icons/Settings";
-import { sendMessageWithSocket, sendUserId } from "../../socket";
+import { sendUserId } from "../../socket";
 import { ApplicationState, ConnectedReduxProps } from "../../store";
 import { fetchDialogues } from "../../store/dialogues/actions";
 import { DialoguesState } from "../../store/dialogues/types";
@@ -21,6 +21,14 @@ import "./index.scss";
 import { DialogueComponent } from "../Dialogue";
 
 const styles = (theme: any) => ({
+  icon: {
+    color: "#a1b1cc",
+    margin: "8px 0",
+    padding: "5px 10px"
+  },
+  nested: {
+    paddingLeft: theme.spacing.unit * 4,
+  },
   root: {
     width: 220,
     backgroundColor: theme.palette.background.paper,
@@ -35,15 +43,7 @@ const styles = (theme: any) => ({
     [theme.breakpoints.up("md")]: {
       width: 220,
     },
-  },
-  nested: {
-    paddingLeft: theme.spacing.unit * 4,
-  },
-  icon: {
-    color: "#a1b1cc",
-    padding: "5px 10px",
-    margin: "8px 0",
-  },
+  }
 });
 
 interface PropsFromState {
@@ -145,7 +145,10 @@ class DialoguesComponent extends Component<AllProps> {
       <div className="dialogues">
         <div className="dialogues__panel panel">
           <div className="panel__user user">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK" className="user__avatar"/>
+            <img
+              src="http://cdn01.ru/files/users/images/6e/21/6e217aef2727ea3a86cecfde9f78d54c.jpg"
+              className="user__avatar"
+            />
             <span className="user__name">Alexa v</span>
           </div>
 
@@ -168,7 +171,7 @@ class DialoguesComponent extends Component<AllProps> {
                   dialogue={dialogue}
                   isSelected={this.state.selected === dialogue._id ? true : false}
                   count={6}
-                  avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"
+                  avatar="https://data.whicdn.com/images/169748367/large.jpg"
                   onSelect={this.onSelectDialogue}
                 />,
               )
@@ -189,7 +192,7 @@ class DialoguesComponent extends Component<AllProps> {
                         isAuthor={this.state.userId === message.User}
                         text={message.Text}
                         time={message.Time}
-                        avatar={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"}
+                        avatar={"https://data.whicdn.com/images/169748367/large.jpg"}
                       />,
                     )
                   }
