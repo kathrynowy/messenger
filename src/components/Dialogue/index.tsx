@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import './index.scss';
-import { Dialogue } from '../../store/dialogues/types';
-
+import { Dialogue } from "../../store/dialogues/types";
+import "./index.scss";
 
 interface PropsFromContainer {
-  text: any
-  avatar: string
-  count: number
-  dialogue: Dialogue
-  userId: string
-  isSelected: boolean
+  text: any;
+  avatar: string;
+  count: number;
+  dialogue: Dialogue;
+  userId: string;
+  isSelected: boolean;
   onSelect(dialogueId): void;
 }
 
@@ -27,7 +26,7 @@ class DialogueComponent extends Component<PropsFromContainer> {
 
         <div className="dialogue__msg-info">
           <div className="dialogue__name">{username}</div>
-          <div className="dialogue__text">{isSelected ? '1' : '2'}</div>
+          <div className="dialogue__text">{isSelected ? "1" : "2"}</div>
         </div>
 
         <div className="dialogue__info">
@@ -39,5 +38,4 @@ class DialogueComponent extends Component<PropsFromContainer> {
   }
 }
 
-
-export { DialogueComponent }
+export { DialogueComponent };

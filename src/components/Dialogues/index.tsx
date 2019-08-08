@@ -1,37 +1,38 @@
-import React, { Component, useEffect, useRef } from 'react';
-import { RouteComponentProps } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React, { Component, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import { RouteComponentProps } from "react-router-dom";
 
-import { User } from '../../store/users/types';
-import { DialoguesState } from '../../store/dialogues/types';
-import { ApplicationState, ConnectedReduxProps } from '../../store';
-import {fetchRequest} from '../../store/users/actions'
-import { fetchDialogues } from '../../store/dialogues/actions';
-import { fetchMessages, sendMessage } from '../../store/messages/actions';
-import { MessagesState } from '../../store/messages/types';
-import Search from '@material-ui/icons/Search';
-import Send from '@material-ui/icons/SendOutlined';
-import Settings from '@material-ui/icons/Settings';
-import Sentiment from '@material-ui/icons/SentimentSatisfiedAltOutlined';
-import { withStyles } from '@material-ui/core/styles';
-import { Message } from '../Message'
-import './index.scss';
+import { withStyles } from "@material-ui/core/styles";
+import Search from "@material-ui/icons/Search";
+import Send from "@material-ui/icons/SendOutlined";
+import Sentiment from "@material-ui/icons/SentimentSatisfiedAltOutlined";
+import Settings from "@material-ui/icons/Settings";
+import { sendMessageWithSocket, sendUserId } from "../../socket";
+import { ApplicationState, ConnectedReduxProps } from "../../store";
+import { fetchDialogues } from "../../store/dialogues/actions";
+import { DialoguesState } from "../../store/dialogues/types";
+import { fetchMessages, sendMessage } from "../../store/messages/actions";
+import { MessagesState } from "../../store/messages/types";
+import {fetchRequest} from "../../store/users/actions";
+import { User } from "../../store/users/types";
+import { Message } from "../Message";
+import "./index.scss";
 
-import { DialogueComponent } from '../Dialogue';
+import { DialogueComponent } from "../Dialogue";
 
 const styles = (theme: any) => ({
   root: {
     width: 220,
     backgroundColor: theme.palette.background.paper,
     zIndex: 0,
-    position: 'static',
-    [theme.breakpoints.between('xs', 'sm')]: {
-      width: 300
+    position: "static",
+    [theme.breakpoints.between("xs", "sm")]: {
+      width: 300,
     },
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: 200,
     },
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up("md")]: {
       width: 220,
     },
   },
@@ -39,62 +40,65 @@ const styles = (theme: any) => ({
     paddingLeft: theme.spacing.unit * 4,
   },
   icon: {
-    color: '#a1b1cc',
-    padding: '5px 10px',
-    margin: '8px 0'
-  }
+    color: "#a1b1cc",
+    padding: "5px 10px",
+    margin: "8px 0",
+  },
 });
 
 interface PropsFromState {
-  loading: boolean
-  users: User[]
-  dialogues: DialoguesState
-  errors?: string
-  classes: any
-  currentDialogue: number
-  messages: MessagesState
+  loading: boolean;
+  users: User[];
+  dialogues: DialoguesState;
+  errors?: string;
+  classes: any;
+  currentDialogue: number;
+  messages: MessagesState;
 }
 
 interface PropsFromDispatch {
-  fetchRequest: typeof fetchRequest
-  fetchDialogues: typeof fetchDialogues
-  fetchMessages: typeof fetchMessages
-  sendMessage: typeof sendMessage
+  fetchRequest: typeof fetchRequest;
+  fetchDialogues: typeof fetchDialogues;
+  fetchMessages: typeof fetchMessages;
+  sendMessage: typeof sendMessage;
 }
 
 interface State {
-  selected: string
-  message: string
-  userId: string
+  selected: string;
+  message: string;
+  userId: string;
 }
 
 type AllProps = State &
   PropsFromState &
   PropsFromDispatch &
   RouteComponentProps<{}> &
-  ConnectedReduxProps
-
+  ConnectedReduxProps;
 
 class DialoguesComponent extends Component<AllProps> {
-    state = {
-      selected: '',
-      message: '',
-      userId: localStorage.getItem('userId')
-    }
+    public state = {
+      selected: "",
+      message: "",
+      userId: localStorage.getItem("userId"),
+    };
 
   public messagesEnd;
 
   public componentDidMount() {
-    const userId = localStorage.getItem('userId');
-    this.props.fetchDialogues({ userId });
+    this.props.fetchDialogues({ userId: this.state.userId });
+    sendUserId(this.state.userId);
     this.props.fetchRequest();
     this.state.selected ? this.props.fetchMessages({ DialogueId: this.state.selected }) : null;
     this.scrollToBottom();
   }
 
-  public onSelectDialogue = dialogueId => {
+  public componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  public onSelectDialogue = (dialogueId) => {
     this.setState({
-      selected: dialogueId
+      selected: dialogueId,
     });
 
     this.props.fetchMessages({ DialogueId: dialogueId });
@@ -102,19 +106,26 @@ class DialoguesComponent extends Component<AllProps> {
 
   public onTypeMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      message: event.target.value
+      message: event.target.value,
     });
   }
 
   public sendMessage = () => {
-    this.setState({
-      message: ''
-    });
+    const currentDialogue = this.props.dialogues.data.find((dialogue) => dialogue._id === this.state.selected);
+    const to = (currentDialogue.Between as any).To;
+    const from = (currentDialogue.Between as any).From;
+
+    const toUser = this.state.userId === to._id ? from._id : to._id;
 
     this.props.sendMessage({
       dialogueId: this.state.selected,
       text: this.state.message,
-      userId: this.state.userId
+      userId: this.state.userId,
+      toUserId: toUser,
+    });
+
+    this.setState({
+      message: "",
     });
   }
 
@@ -127,14 +138,9 @@ class DialoguesComponent extends Component<AllProps> {
     }
   }
 
-  componentDidUpdate() {
-    this.scrollToBottom();
-  }
-
   public render() {
     const { dialogues, classes, messages } = this.props;
 
-    const userId = localStorage.getItem('userId');
     return (
       <div className="dialogues">
         <div className="dialogues__panel panel">
@@ -154,17 +160,17 @@ class DialoguesComponent extends Component<AllProps> {
 
           <div className="dialogues__container">
             {
-              dialogues.data.map(dialogue =>
+              dialogues.data.map((dialogue) =>
                 <DialogueComponent
                   key={dialogue.DialogueId}
-                  userId={userId ? userId : '65'}
+                  userId={this.state.userId ? this.state.userId : null}
                   text="gfhgfhfghfg"
                   dialogue={dialogue}
                   isSelected={this.state.selected === dialogue._id ? true : false}
                   count={6}
                   avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"
                   onSelect={this.onSelectDialogue}
-                />
+                />,
               )
             }
           </div>
@@ -174,17 +180,17 @@ class DialoguesComponent extends Component<AllProps> {
           {
             this.state.selected && (
               <div className="dialogues__dialogue">
-                
-                <div className="dialogues__messages" ref={div => this.messagesEnd = div}>
+
+                <div className="dialogues__messages" ref={(div) => this.messagesEnd = div}>
                   {
-                    messages.data.map(message => 
+                    messages.data.map((message) =>
                       <Message
                         key={message._id}
-                        isAuthor={userId === message.User}
+                        isAuthor={this.state.userId === message.User}
                         text={message.Text}
                         time={message.Time}
-                        avatar={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"} 
-                      />
+                        avatar={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvizXbhciL4R_fzPpRmD3pwti_qIBTQG7icTvosm4ohPqM9HEK"}
+                      />,
                     )
                   }
                 </div>
@@ -220,19 +226,18 @@ const mapStateToProps = ({ users, dialogues, messages }: ApplicationState) => ({
   loading: users.loading,
   errors: users.errors,
   users: users.data,
-  dialogues: dialogues,
-  messages: messages
-})
+  dialogues,
+  messages,
+});
 
 const mapDispatchToProps = {
   fetchRequest,
   fetchDialogues,
   fetchMessages,
-  sendMessage
-}
-
+  sendMessage,
+};
 
 export const Dialogues = withStyles(styles as any)(connect(
   mapStateToProps,
-  mapDispatchToProps
-)(DialoguesComponent)); 
+  mapDispatchToProps,
+)(DialoguesComponent));
