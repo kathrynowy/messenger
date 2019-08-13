@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import "./index.scss";
+import './index.scss';
 
 interface PropsFromContainer {
   text: string;
@@ -14,17 +14,17 @@ class Message extends Component<PropsFromContainer> {
     const { text, avatar, isAuthor, time } = this.props;
 
     return (
-      <div className={`message ${isAuthor ? "message_right" : "message_left"}`}>
+      <div className={`message ${isAuthor ? 'message_right' : 'message_left'}`}>
         <img className="message__avatar" src={avatar}/>
 
         <div className="message__info">
-          <div  className={`message__text ${isAuthor ? "message__text_right" : "message__text_left"}`}>
+          <div  className={`message__text ${isAuthor ? 'message__text_right' : 'message__text_left'}`}>
             {text}
           </div>
 
-          <div className={`message__date ${isAuthor ? "message__date_right" : "message__date_left"}`}>
+          <div className={`message__date ${isAuthor ? 'message__date_right' : 'message__date_left'}`}>
           {
-            new Date(time).toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric", hour12: true })
+            new Date(time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
           }
           </div>
         </div>

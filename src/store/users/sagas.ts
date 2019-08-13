@@ -1,6 +1,6 @@
-import { all, /* call, */ fork, put, takeEvery } from "redux-saga/effects";
-import { fetchError, fetchSuccess } from "./actions";
-import { UsersActionTypes } from "./types";
+import { all, /* call, */ fork, put, takeEvery } from 'redux-saga/effects';
+import { fetchError, fetchSuccess } from './actions';
+import { UsersActionTypes } from './types';
 /* import { callApi } from '../../utils/api' */
 
 function* handleFetch() {
@@ -8,8 +8,8 @@ function* handleFetch() {
     // To call async functions, use redux-saga's `call()`.
     /* const res = yield call(callApi, 'get', API_ENDPOINT, '/heroStats') */
     const res = [{
-      Dialogues: ["5d308fccf3d6a151f00b9bfe"],
-      Username: "Katya",
+      Dialogues: ['5d308fccf3d6a151f00b9bfe'],
+      Username: 'Katya',
       UserId: 2,
     }];
 
@@ -18,7 +18,7 @@ function* handleFetch() {
     if (err instanceof Error) {
       yield put(fetchError(err.stack!));
     } else {
-      yield put(fetchError("An unknown error occured."));
+      yield put(fetchError('An unknown error occured.'));
     }
   }
 }

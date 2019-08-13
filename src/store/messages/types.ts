@@ -8,11 +8,11 @@ export interface Message extends ApiResponse {
 export type ApiResponse = Record<string, any>;
 
 export enum MessagesActionTypes {
-  FETCH_MESSAGES = "@@messages/FETCH_MESSAGES",
-  FETCH_SUCCESS = "@@messages/FETCH_SUCCESS",
-  FETCH_ERROR = "@@messages/FETCH_ERROR",
-  SEND_MESSAGE = "@@messages/SEND_MESSAGE",
-  SEND_SUCCESS = "@@messages/SEND_SUCCESS",
+  FETCH_MESSAGES = '@@messages/FETCH_MESSAGES',
+  FETCH_SUCCESS = '@@messages/FETCH_SUCCESS',
+  FETCH_ERROR = '@@messages/FETCH_ERROR',
+  SEND_MESSAGE = '@@messages/SEND_MESSAGE',
+  SEND_SUCCESS = '@@messages/SEND_SUCCESS',
 }
 
 export interface MessagesState {

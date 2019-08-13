@@ -1,8 +1,8 @@
-import axios from "axios";
-import { AnyAction } from "redux";
-import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { fetchError, fetchSuccess } from "./actions";
-import { DialoguesActionTypes } from "./types";
+import axios from 'axios';
+import { AnyAction } from 'redux';
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
+import { fetchError, fetchSuccess } from './actions';
+import { DialoguesActionTypes } from './types';
 /* import { callApi } from '../../utils/api' */
 
 function* handleFetch(actionData: AnyAction) {
@@ -19,7 +19,7 @@ function* handleFetch(actionData: AnyAction) {
     if (err instanceof Error) {
       yield put(fetchError(err.stack!));
     } else {
-      yield put(fetchError("An unknown error occured."));
+      yield put(fetchError('An unknown error occured.'));
     }
   }
 }

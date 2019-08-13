@@ -1,49 +1,45 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { RouteComponentProps } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
 
-import { withStyles } from "@material-ui/core/styles";
-import Search from "@material-ui/icons/Search";
-import Send from "@material-ui/icons/SendOutlined";
-import Sentiment from "@material-ui/icons/SentimentSatisfiedAltOutlined";
-import Settings from "@material-ui/icons/Settings";
-import { sendUserId } from "../../socket";
-import { ApplicationState, ConnectedReduxProps } from "../../store";
-import { fetchDialogues } from "../../store/dialogues/actions";
-import { DialoguesState } from "../../store/dialogues/types";
-import { fetchMessages, sendMessage } from "../../store/messages/actions";
-import { MessagesState } from "../../store/messages/types";
-import {fetchRequest} from "../../store/users/actions";
-import { User } from "../../store/users/types";
-import { Message } from "../Message";
-import "./index.scss";
-
-import { DialogueComponent } from "../Dialogue";
+import { withStyles } from '@material-ui/core/styles';
+import { Search, SendOutlined, SentimentSatisfiedAltOutlined, Settings } from '@material-ui/icons';
+import { sendUserId } from '../../socket';
+import { ApplicationState, ConnectedReduxProps } from '../../store';
+import { fetchDialogues } from '../../store/dialogues/actions';
+import { DialoguesState } from '../../store/dialogues/types';
+import { fetchMessages, sendMessage } from '../../store/messages/actions';
+import { MessagesState } from '../../store/messages/types';
+import {fetchRequest} from '../../store/users/actions';
+import { User } from '../../store/users/types';
+import { DialogueComponent } from '../Dialogue';
+import { Message } from '../Message';
+import './index.scss';
 
 const styles = (theme: any) => ({
   icon: {
-    color: "#a1b1cc",
-    margin: "8px 0",
-    padding: "5px 10px"
+    color: '#a1b1cc',
+    margin: '8px 0',
+    padding: '5px 10px',
   },
   nested: {
     paddingLeft: theme.spacing.unit * 4,
   },
   root: {
-    width: 220,
     backgroundColor: theme.palette.background.paper,
+    position: 'static',
+    width: 220,
     zIndex: 0,
-    position: "static",
-    [theme.breakpoints.between("xs", "sm")]: {
+    [theme.breakpoints.between('xs', 'sm')]: {
       width: 300,
     },
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       width: 200,
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up('md')]: {
       width: 220,
     },
-  }
+  },
 });
 
 interface PropsFromState {
@@ -77,12 +73,12 @@ type AllProps = State &
 
 class DialoguesComponent extends Component<AllProps> {
     public state = {
-      selected: "",
-      message: "",
-      userId: localStorage.getItem("userId"),
+      message: '',
+      selected: '',
+      userId: localStorage.getItem('userId'),
     };
 
-  public messagesEnd;
+  public messagesEnd: any;
 
   public componentDidMount() {
     this.props.fetchDialogues({ userId: this.state.userId });
@@ -96,7 +92,7 @@ class DialoguesComponent extends Component<AllProps> {
     this.scrollToBottom();
   }
 
-  public onSelectDialogue = (dialogueId) => {
+  public onSelectDialogue = (dialogueId: string) => {
     this.setState({
       selected: dialogueId,
     });
@@ -120,12 +116,12 @@ class DialoguesComponent extends Component<AllProps> {
     this.props.sendMessage({
       dialogueId: this.state.selected,
       text: this.state.message,
-      userId: this.state.userId,
       toUserId: toUser,
+      userId: this.state.userId,
     });
 
     this.setState({
-      message: "",
+      message: '',
     });
   }
 
@@ -146,10 +142,10 @@ class DialoguesComponent extends Component<AllProps> {
         <div className="dialogues__panel panel">
           <div className="panel__user user">
             <img
-              src="http://cdn01.ru/files/users/images/6e/21/6e217aef2727ea3a86cecfde9f78d54c.jpg"
+              src="https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg"
               className="user__avatar"
             />
-            <span className="user__name">Alexa v</span>
+            <span className="user__name">Alexa</span>
           </div>
 
           <Settings className="panel__icon"/>
@@ -169,9 +165,9 @@ class DialoguesComponent extends Component<AllProps> {
                   userId={this.state.userId ? this.state.userId : null}
                   text="gfhgfhfghfg"
                   dialogue={dialogue}
-                  isSelected={this.state.selected === dialogue._id ? true : false}
+                  isSelected={this.state.selected === dialogue._id}
                   count={6}
-                  avatar="https://data.whicdn.com/images/169748367/large.jpg"
+                  avatar="https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg"
                   onSelect={this.onSelectDialogue}
                 />,
               )
@@ -192,14 +188,14 @@ class DialoguesComponent extends Component<AllProps> {
                         isAuthor={this.state.userId === message.User}
                         text={message.Text}
                         time={message.Time}
-                        avatar={"https://data.whicdn.com/images/169748367/large.jpg"}
+                        avatar={'https://data.whicdn.com/images/169748367/large.jpg'}
                       />,
                     )
                   }
                 </div>
 
                 <div className="dialogues__message-input message-input">
-                  <Sentiment className="message-input__icon"/>
+                  <SentimentSatisfiedAltOutlined className="message-input__icon"/>
                   <input
                     type="text"
                     placeholder="Type a message..."
@@ -207,7 +203,7 @@ class DialoguesComponent extends Component<AllProps> {
                     onChange={this.onTypeMessage}
                     value={this.state.message}
                   />
-                  <Send className="message-input__icon" onClick={this.sendMessage}/>
+                  <SendOutlined className="message-input__icon" onClick={this.sendMessage}/>
                 </div>
               </div>
             )
@@ -226,17 +222,17 @@ class DialoguesComponent extends Component<AllProps> {
 }
 
 const mapStateToProps = ({ users, dialogues, messages }: ApplicationState) => ({
-  loading: users.loading,
-  errors: users.errors,
-  users: users.data,
   dialogues,
+  errors: users.errors,
+  loading: users.loading,
   messages,
+  users: users.data,
 });
 
 const mapDispatchToProps = {
-  fetchRequest,
   fetchDialogues,
   fetchMessages,
+  fetchRequest,
   sendMessage,
 };
 

@@ -1,5 +1,5 @@
-import { Reducer } from "redux";
-import { DialoguesActionTypes, DialoguesState } from "./types";
+import { Reducer } from 'redux';
+import { DialoguesActionTypes, DialoguesState } from './types';
 
 export const initialState: DialoguesState = {
   data: [],

@@ -1,14 +1,14 @@
-import { ConnectedRouter } from "connected-react-router";
-import React from "react";
-import { Provider } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import { Store } from "redux";
+import { ConnectedRouter } from 'connected-react-router';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { Store } from 'redux';
 
-import { History } from "history";
-import "./App.scss";
-import { LoginPage } from "./components/Auth";
-import { Dialogues } from "./components/Dialogues";
-import { ApplicationState } from "./store";
+import { History } from 'history';
+import './App.scss';
+import { LoginPage } from './components/Auth';
+import { Dialogues } from './components/Dialogues';
+import { ApplicationState } from './store';
 
 interface MainProps {
   store: Store<ApplicationState>;
