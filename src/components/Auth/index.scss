@@ -3,16 +3,18 @@
 .login-container {
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 550px;
+  align-self: center;
+  width: 300px;
+  height: 450px;
   margin: 20px auto;
   padding: 0 40px;
   justify-content: center;
-  margin-top: 160px;
   background-size: cover;
   background-color: $main-background;
   color: $main-gray-font-color;
   font-family: $font-family-main;
+  border-radius: 5%;
+  opacity: .9;
 
   &__label {
     font-size: 22px;
