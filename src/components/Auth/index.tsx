@@ -52,20 +52,20 @@ class Login extends Component<PropsFromState> {
     const { classes } = this.props;
 
     return (
-      <div className="login-container">
-        <div className="login-container__label">Login to your account</div>
-        <div className="login-container__inputs inputs">
-          <div className="inputs__input-container">
+      <div className='login-container'>
+        <div className='login-container__label'>Login to your account</div>
+        <div className='login-container__inputs inputs'>
+          <div className='inputs__input-container'>
             <PermIdentity className={classes.userIcon}/>
-            <input className="inputs__input"/>
+            <input className='inputs__input'/>
           </div>
 
-          <div className="login-container__input-container">
+          <div className='login-container__input-container'>
             <Lock className={classes.lockIcon}/>
-            <input className="inputs__input" type="password"/>
+            <input className='inputs__input' type='password'/>
           </div>
 
-          <button className="login-container__sign">Sign</button>
+          <button className='login-container__sign'>Sign</button>
         </div>
       </div>
     );

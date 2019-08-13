@@ -19,10 +19,10 @@ const App: React.FC<MainProps> = ({ store, history }) =>  {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <div className="app-container">
+        <div className='app-container'>
           <Switch>
-            <Route exact path="/" component={Dialogues} />
-            <Route exact path="/login" component={LoginPage} />
+            <Route exact path='/' component={Dialogues} />
+            <Route exact path='/login' component={LoginPage} />
             <Route component={() => <div>Not Found</div>} />
           </Switch>
         </div>

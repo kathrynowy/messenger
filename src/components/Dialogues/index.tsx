@@ -138,36 +138,36 @@ class DialoguesComponent extends Component<AllProps> {
     const { dialogues, classes, messages } = this.props;
 
     return (
-      <div className="dialogues">
-        <div className="dialogues__panel panel">
-          <div className="panel__user user">
+      <div className='dialogues'>
+        <div className='dialogues__panel panel'>
+          <div className='panel__user user'>
             <img
-              src="https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg"
-              className="user__avatar"
+              src='https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg'
+              className='user__avatar'
             />
-            <span className="user__name">Alexa</span>
+            <span className='user__name'>Alexa</span>
           </div>
 
-          <Settings className="panel__icon"/>
+          <Settings className='panel__icon'/>
         </div>
 
-        <div className="dialogues__information">
-          <div className="dialogues__search search">
+        <div className='dialogues__information'>
+          <div className='dialogues__search search'>
             <Search className={classes.icon}/>
-            <input type="text" className="search__input" placeholder="Search in your inbox..."/>
+            <input type='text' className='search__input' placeholder='Search in your inbox...'/>
           </div>
 
-          <div className="dialogues__container">
+          <div className='dialogues__container'>
             {
               dialogues.data.map((dialogue) =>
                 <DialogueComponent
                   key={dialogue.DialogueId}
                   userId={this.state.userId ? this.state.userId : null}
-                  text="gfhgfhfghfg"
+                  text='gfhgfhfghfg'
                   dialogue={dialogue}
                   isSelected={this.state.selected === dialogue._id}
                   count={6}
-                  avatar="https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg"
+                  avatar='https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg'
                   onSelect={this.onSelectDialogue}
                 />,
               )
@@ -175,12 +175,12 @@ class DialoguesComponent extends Component<AllProps> {
           </div>
         </div>
 
-        <div className="dialogues__dialogue-container">
+        <div className='dialogues__dialogue-container'>
           {
             this.state.selected && (
-              <div className="dialogues__dialogue">
+              <div className='dialogues__dialogue'>
 
-                <div className="dialogues__messages" ref={(div) => this.messagesEnd = div}>
+                <div className='dialogues__messages' ref={(div) => this.messagesEnd = div}>
                   {
                     messages.data.map((message) =>
                       <Message
@@ -194,23 +194,23 @@ class DialoguesComponent extends Component<AllProps> {
                   }
                 </div>
 
-                <div className="dialogues__message-input message-input">
-                  <SentimentSatisfiedAltOutlined className="message-input__icon"/>
+                <div className='dialogues__message-input message-input'>
+                  <SentimentSatisfiedAltOutlined className='message-input__icon'/>
                   <input
-                    type="text"
-                    placeholder="Type a message..."
-                    className="message-input__input"
+                    type='text'
+                    placeholder='Type a message...'
+                    className='message-input__input'
                     onChange={this.onTypeMessage}
                     value={this.state.message}
                   />
-                  <SendOutlined className="message-input__icon" onClick={this.sendMessage}/>
+                  <SendOutlined className='message-input__icon' onClick={this.sendMessage}/>
                 </div>
               </div>
             )
           }
           {
             !this.state.selected && (
-              <div className="dialogues_choose-dialogue">
+              <div className='dialogues_choose-dialogue'>
                 Please select a chat to start messaging
               </div>
             )

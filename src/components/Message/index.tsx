@@ -15,9 +15,9 @@ class Message extends Component<PropsFromContainer> {
 
     return (
       <div className={`message ${isAuthor ? 'message_right' : 'message_left'}`}>
-        <img className="message__avatar" src={avatar}/>
+        <img className='message__avatar' src={avatar}/>
 
-        <div className="message__info">
+        <div className='message__info'>
           <div  className={`message__text ${isAuthor ? 'message__text_right' : 'message__text_left'}`}>
             {text}
           </div>
