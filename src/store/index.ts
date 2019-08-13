@@ -1,30 +1,27 @@
-import { combineReducers, Dispatch, Action, AnyAction } from 'redux'
-import { all, fork } from 'redux-saga/effects'
-import { connectRouter, RouterState } from 'connected-react-router'
-import { History } from 'history'
+import { connectRouter, RouterState } from "connected-react-router";
+import { History } from "history";
+import { Action, AnyAction, combineReducers, Dispatch } from "redux";
+import { all, fork } from "redux-saga/effects";
 
-
-import {usersSaga} from './users/sagas'
-import { usersReducer } from './users/reducer'
-import { UsersState } from './users/types'
-import { DialoguesState } from './dialogues/types';
-import { dialoguesSaga } from './dialogues/sagas';
-import { DialoguesReducer } from './dialogues/reducer';
-import { MessagesState } from './messages/types';
-import { MessagesReducer } from './messages/reducer';
-import { messagesSaga } from './messages/sagas';
-
-
+import { DialoguesReducer } from "./dialogues/reducer";
+import { dialoguesSaga } from "./dialogues/sagas";
+import { DialoguesState } from "./dialogues/types";
+import { MessagesReducer } from "./messages/reducer";
+import { messagesSaga } from "./messages/sagas";
+import { MessagesState } from "./messages/types";
+import { usersReducer } from "./users/reducer";
+import {usersSaga} from "./users/sagas";
+import { UsersState } from "./users/types";
 
 export interface ApplicationState {
-  users: UsersState
-  router: RouterState
-  dialogues: DialoguesState
-  messages: MessagesState
+  users: UsersState;
+  router: RouterState;
+  dialogues: DialoguesState;
+  messages: MessagesState;
 }
 
 export interface ConnectedReduxProps<A extends Action = AnyAction> {
-  dispatch: Dispatch<A>
+  dispatch: Dispatch<A>;
 }
 
 export const createRootReducer = (history: History) =>
@@ -32,9 +29,9 @@ export const createRootReducer = (history: History) =>
     users: usersReducer,
     dialogues: DialoguesReducer,
     messages: MessagesReducer,
-    router: connectRouter(history)
-  })
+    router: connectRouter(history),
+  });
 
 export function* rootSaga() {
-  yield all([fork(usersSaga), fork(dialoguesSaga), fork(messagesSaga)])
+  yield all([fork(usersSaga), fork(dialoguesSaga), fork(messagesSaga)]);
 }

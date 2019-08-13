@@ -1,19 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { createHashHistory } from 'history'
+import { createHashHistory } from "history";
+import React from "react";
+import ReactDOM from "react-dom";
 
-import configureStore from './configureStore';
-import { App } from './App';
-import './index.scss';
-import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:8000');
+import openSocket from "socket.io-client";
+import { App } from "./App";
+import configureStore from "./configureStore";
+import "./index.scss";
+import { configureSocket } from "./socket";
 
-const initialState = window.initialReduxState
-const history = createHashHistory()
+const initialState = window.initialReduxState;
+const history = createHashHistory();
 
-const store = configureStore(history, initialState)
-
+const store = configureStore(history, initialState);
+export const socket = configureSocket(store);
 
 ReactDOM.render(
-  <App  store={store} history={history}/>, document.getElementById('root')
+  <App  store={store} history={history}/>, document.getElementById("root"),
 );

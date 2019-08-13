@@ -5,15 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server -d",
-    "build": "NODE_ENV=prod webpack -p"
+    "build": "NODE_ENV=prod webpack -p",
+    "tslint": "tslint -p tsconfig.json -c tslint.json",
+    "tslint-fix": "tslint --fix -p tsconfig.json -c tslint.json"
   },
   "dependencies": {
     "@babel/runtime": "^7.5.4",
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
-    "@types/react-redux": "^7.1.1",
-    "@types/redux-persist": "^4.3.1",
-    "@types/socket.io-client": "^1.4.32",
     "axios": "^0.19.0",
     "connected-react-router": "^6.5.0",
     "history": "^4.9.0",
@@ -41,7 +40,10 @@
     "@types/history": "^4.7.2",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
+    "@types/react-redux": "^7.1.1",
     "@types/react-router-dom": "^4.3.4",
+    "@types/redux-persist": "^4.3.1",
+    "@types/socket.io-client": "^1.4.32",
     "@types/webpack-env": "^1.13.9",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
@@ -55,6 +57,8 @@
     "sass-loader": "^7.1.0",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
+    "tslint": "^5.18.0",
+    "tslint-react": "^4.0.0",
     "typescript": "^3.5.2",
     "url-loader": "^2.0.1",
     "webpack": "^4.35.2",
