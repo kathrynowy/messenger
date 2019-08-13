@@ -1,9 +1,9 @@
-import axios from "axios";
-import { AnyAction } from "redux";
-import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { sendMessageWithSocket } from "../../socket";
-import { fetchError, fetchSuccess, sendSuccess } from "./actions";
-import { MessagesActionTypes } from "./types";
+import axios from 'axios';
+import { AnyAction } from 'redux';
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
+import { sendMessageWithSocket } from '../../socket';
+import { fetchError, fetchSuccess, sendSuccess } from './actions';
+import { MessagesActionTypes } from './types';
 
 function* handleFetch(actionData: AnyAction) {
   try {
@@ -15,7 +15,7 @@ function* handleFetch(actionData: AnyAction) {
     if (err instanceof Error) {
       yield put(fetchError(err.stack!));
     } else {
-      yield put(fetchError("An unknown error occured."));
+      yield put(fetchError('An unknown error occured.'));
     }
   }
 }
@@ -25,7 +25,7 @@ function* sendMessage(actionData: AnyAction) {
     const { dialogueId, text, userId, toUserId } = actionData.payload;
     const time = new Date().getTime();
     const { data } = yield call(() =>
-      axios.post("http://localhost:8000/message/add", {
+      axios.post('http://localhost:8000/message/add', {
         Dialogue: dialogueId,
         Text: text,
         User: userId,

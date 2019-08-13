@@ -1,6 +1,6 @@
 
-import { action } from "typesafe-actions";
-import { Message, MessagesActionTypes } from "./types";
+import { action } from 'typesafe-actions';
+import { Message, MessagesActionTypes } from './types';
 
 export const fetchMessages = (actionData: any) => action(MessagesActionTypes.FETCH_MESSAGES, actionData);
 

@@ -1,6 +1,6 @@
 
-import { action } from "typesafe-actions";
-import { User, UsersActionTypes } from "./types";
+import { action } from 'typesafe-actions';
+import { User, UsersActionTypes } from './types';
 
 export const fetchRequest = () => action(UsersActionTypes.FETCH_REQUEST);
 

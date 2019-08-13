@@ -1,5 +1,5 @@
-import { Reducer } from "redux";
-import { MessagesActionTypes, MessagesState } from "./types";
+import { Reducer } from 'redux';
+import { MessagesActionTypes, MessagesState } from './types';
 
 export const initialState: MessagesState = {
   data: [],

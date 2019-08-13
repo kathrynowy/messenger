@@ -1,14 +1,14 @@
-import { ConnectedRouter } from "connected-react-router";
-import React from "react";
-import { Provider } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import { Store } from "redux";
+import { ConnectedRouter } from 'connected-react-router';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { Store } from 'redux';
 
-import { History } from "history";
-import "./App.scss";
-import { LoginPage } from "./components/Auth";
-import { Dialogues } from "./components/Dialogues";
-import { ApplicationState } from "./store";
+import { History } from 'history';
+import './App.scss';
+import { LoginPage } from './components/Auth';
+import { Dialogues } from './components/Dialogues';
+import { ApplicationState } from './store';
 
 interface MainProps {
   store: Store<ApplicationState>;
@@ -19,10 +19,10 @@ const App: React.FC<MainProps> = ({ store, history }) =>  {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <div className="app-container">
+        <div className='app-container'>
           <Switch>
-            <Route exact path="/" component={Dialogues} />
-            <Route exact path="/login" component={LoginPage} />
+            <Route exact path='/' component={Dialogues} />
+            <Route exact path='/login' component={LoginPage} />
             <Route component={() => <div>Not Found</div>} />
           </Switch>
         </div>

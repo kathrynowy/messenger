@@ -1,5 +1,5 @@
-import { Reducer } from "redux";
-import { UsersActionTypes, UsersState } from "./types";
+import { Reducer } from 'redux';
+import { UsersActionTypes, UsersState } from './types';
 
 export const initialState: UsersState = {
   data: [],

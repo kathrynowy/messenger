@@ -7,4 +7,12 @@
   background-size: cover;
   margin: 0;
   display: flex;
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #b9c4d6;
+  }
 }

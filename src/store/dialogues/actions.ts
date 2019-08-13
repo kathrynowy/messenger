@@ -1,6 +1,6 @@
 
-import { action } from "typesafe-actions";
-import { Dialogue, DialoguesActionTypes } from "./types";
+import { action } from 'typesafe-actions';
+import { Dialogue, DialoguesActionTypes } from './types';
 
 export const fetchDialogues = (actionData: any) => action(DialoguesActionTypes.FETCH_DIALOGUES, actionData);
 
