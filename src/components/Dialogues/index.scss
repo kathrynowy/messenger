@@ -1,17 +1,18 @@
+@import '../../assets/sass/variables.scss';
+
 .dialogues {
   display: flex;
   max-width: 1200px;
   width: 90%;
   height: 650px;
-  background-color: #090F1A;
   margin: 20px auto;
   justify-content: center;
   margin-top: 160px;
+  color: $main-gray-font-color;
 
   &_choose-dialogue {
-    color: #b7c3d8;
-    background-color: #0b1222;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    background-color: $main-dark-background;
+    font-family: $font-family-main;
     line-height: 1.2;
     border-radius: 15px;
     padding: 3px 15px;
@@ -26,10 +27,10 @@
     display: flex;
     justify-content: space-between;
     width: 7%;
-    color: #a1b1cc;
     display: flex;
     flex-direction: column;
     padding: 15px 5px;
+    background-color: $main-dark-background;
 
     .user {
       display: flex;
@@ -44,14 +45,13 @@
       }
 
       &__name {
-        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        font-family: $font-family-main;
       }
     }
 
     &__icon {
       width: 30px;
       height: 30px;
-      color: #a1b1cc;
       font-weight: 300px;
       cursor: pointer;
       display: flex;
@@ -72,13 +72,13 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, .1);
+      background: $scroll-background;
     }
   }
 
   .message-input {
     display: flex;
-    background-color: #090F1A;
+    background-color: $main-dark-background;
     align-items: center;
     justify-content: space-between;
     padding: 0px 15px;
@@ -87,34 +87,33 @@
     &__icon {
       width: 30px;
       height: 30px;
-      color: #a1b1cc;
       font-weight: 300px;
       cursor: pointer;
     }
 
     &__input {
-      background-color: transparent;
+      background-color: $transparent;
       border: none;
       padding: 5px 10px;
       margin: 8px 0;
       box-sizing: border-box;
       font-size: 18px;
-      color: #a1b1cc;
-      font-family: "Trebuchet MS", Helvetica, sans-serif;
+      font-family: $font-family-main;
       width: 80%;
+      color: $main-gray-font-color;
 
       &:focus {
         outline: none;
       }
   
       &::placeholder {
-        color: #a1b1cc;
+        color: $main-gray-font-color;
       }
     }
   }
 
   &__information {
-    background-color: #131A2B;
+    background-color: $main-background;
     width: 35%;
     padding: 10px;
     padding-top: 15px;
@@ -128,22 +127,22 @@
       justify-content: center;
 
       &__input {
-        background-color: transparent;
+        background-color: $transparent;
         border: none;
         padding: 5px 10px;
         margin: 8px 0;
         box-sizing: border-box;
         font-size: 18px;
-        color: #a1b1cc;
-        border-left: 2px #a1b1cc solid;
-        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        border-left: 2px $main-gray-font-color solid;
+        font-family: $font-family-main;
+        color: $main-gray-font-color;
 
         &:focus {
           outline: none;
         }
     
         &::placeholder {
-          color: #a1b1cc;
+          color: $main-gray-font-color;
         }
       }
     }
@@ -158,12 +157,12 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(0, 0, 0, .1);
+      background: $scroll-background;
     }
   }
 
   &__dialogue-container {
-    background-color: #131A2B;
+    background-color: $main-background;
     display: flex;
     width: 57%;
     padding-top: 20px;
