@@ -1,3 +1,5 @@
+@import '../../assets/sass/variables.scss';
+
 .message {
   background: transparent;
   max-height: 200px;
@@ -29,7 +31,7 @@
   &__text {
     min-height: 35px;
     padding: 8px 15px;
-    color: #ffd9d1;
+    color: $message-text;
     font-size: 18px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -37,27 +39,28 @@
     align-items: center;
     margin-bottom: 4px;
     line-height: 1.2;
-    font-family: "Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";
+    font-family: $font-family-message;
     word-break: break-word;
     max-width: 70%;
 
-    &_left {
-      background: linear-gradient(150deg, #fc9f61 20%, #fc6461, #ff3455);
+    &_left, &_right {
       border-top-right-radius: 15px;
       margin-left: 10px;
+    }
+
+    &_left {
+      background: $yellow-red-gradient;
       align-self: flex-start;
     }
 
     &_right {
-      background: linear-gradient(150deg, #f82d5a, #bc2696, #811fce);
-      border-top-left-radius: 15px;
-      margin-right: 10px;
+      background: $red-violet-gradient;
       align-self: flex-end;
     }
   }
 
   &__date {
-    color: #696f7e;
+    color: $message-date;
     font-size: 14px;
     display: flex;
 
