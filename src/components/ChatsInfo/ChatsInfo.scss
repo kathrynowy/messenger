@@ -1,0 +1,50 @@
+@import '../../styles/variables.scss';
+
+.chats {
+  background-color: $main-background;
+  width: 35%;
+  padding: 10px;
+  padding-top: 15px;
+  padding-right: 0px;
+  display: flex;
+  flex-direction: column;
+
+  &__search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  &__input {
+    background-color: $transparent;
+    border: none;
+    padding: 5px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    border-left: 2px $main-gray-font-color solid;
+    font-family: $font-family-main;
+    color: $main-gray-font-color;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $main-gray-font-color;
+    }
+  }
+
+  &__container {
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $scroll-background;
+    }
+  }
+}

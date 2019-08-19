@@ -9,7 +9,7 @@ interface PropsFromContainer {
   isAuthor: boolean;
 }
 
-class Message extends Component<PropsFromContainer> {
+class MessageComponent extends Component<PropsFromContainer> {
   public render() {
     const { text, avatar, isAuthor, time } = this.props;
 
@@ -33,4 +33,4 @@ class Message extends Component<PropsFromContainer> {
   }
 }
 
-export {Message};
+export { MessageComponent };
