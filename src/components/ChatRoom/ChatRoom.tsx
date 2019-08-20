@@ -3,18 +3,18 @@ import React, { Component } from 'react';
 import { Message } from '../../store/messages/types';
 import { InputPanel } from '../InputPanel/InputPanel';
 import { MessageComponent } from '../Message';
-import './Chat.scss';
+import './ChatRoom.scss';
 
 interface PropsFromContainer {
   messages: Message[];
   message: string;
   userId: string;
-  selectedDialogue: string;
+  selectedChat: string;
   onTypeMessage(event: React.ChangeEvent<HTMLInputElement>): void;
   sendMessage(): void;
 }
 
-class Chat extends Component<PropsFromContainer> {
+class ChatRoom extends Component<PropsFromContainer> {
   public componentDidMount() {
     this.scrollToBottom();
   }
@@ -24,7 +24,7 @@ class Chat extends Component<PropsFromContainer> {
   }
 
   public scrollToBottom = () => {
-    if (this.props.selectedDialogue) {
+    if (this.props.selectedChat) {
       const scrollHeight = this.messagesEnd.scrollHeight;
       const height = this.messagesEnd.clientHeight;
       const maxScrollTop = scrollHeight - height;
@@ -36,15 +36,15 @@ class Chat extends Component<PropsFromContainer> {
     const { messages, userId, onTypeMessage, sendMessage, message } = this.props;
 
     return (
-      <div className='chat'>
-        <div className='chat__messages' ref={(div) => this.messagesEnd = div}>
+      <div className='chat-room'>
+        <div className='chat-room__messages' ref={(div) => this.messagesEnd = div}>
           {
             messages.map((messageInfo) =>
               <MessageComponent
                 key={messageInfo._id}
-                isAuthor={userId === messageInfo.User}
-                text={messageInfo.Text}
-                time={messageInfo.Time}
+                isAuthor={userId === messageInfo.user}
+                text={messageInfo.text}
+                time={messageInfo.time}
                 avatar={'https://data.whicdn.com/images/169748367/large.jpg'}
               />,
             )
@@ -61,4 +61,4 @@ class Chat extends Component<PropsFromContainer> {
   }
 }
 
-export { Chat };
+export { ChatRoom };

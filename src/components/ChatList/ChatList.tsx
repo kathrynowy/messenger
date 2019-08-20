@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Search } from '@material-ui/icons';
-import { DialogueComponent } from '../Dialogue';
-import { Dialogue } from './../../store/dialogues/types';
-import './ChatsInfo.scss';
+import { Chat } from '../../store/chats/types';
+import './ChatList.scss';
+import { ChatListItem } from './ChatListItem/ChatListItem';
 
 const styles = () => ({
   icon: {
@@ -19,15 +19,15 @@ interface PropsFromState {
 }
 
 interface PropsFromContainer {
-  dialogues: Dialogue[];
+  chats: Chat[];
   userId: string;
-  selectedDialogue: string;
-  onSelectDialogue(dialogueId: string): void;
+  selectedChat: string;
+  onSelectChat(chatId: string): void;
 }
 
-class ChatsInfoComponent extends Component<PropsFromContainer & PropsFromState> {
+class ChatListComponent extends Component<PropsFromContainer & PropsFromState> {
   public render() {
-    const { dialogues, classes, userId, onSelectDialogue, selectedDialogue } = this.props;
+    const { chats, classes, userId, onSelectChat, selectedChat } = this.props;
 
     return (
       <div className='chats'>
@@ -38,17 +38,17 @@ class ChatsInfoComponent extends Component<PropsFromContainer & PropsFromState> 
 
         <div className='chats__container'>
           {
-            dialogues.map((dialogue: any) =>
-              <DialogueComponent
-                key={dialogue.DialogueId}
+            chats.map((chat) =>
+              <ChatListItem
+                key={chat.chatId}
                 userId={userId ? userId : null}
                 text='gfhgfhfghfg'
-                dialogue={dialogue}
-                isSelected={selectedDialogue === dialogue._id}
+                chat={chat}
+                isSelected={selectedChat === chat._id}
                 count={6}
                 avatar='https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg'
                 // tslint:disable-next-line: jsx-no-lambda
-                onSelect={() => onSelectDialogue(dialogue._id)}
+                onSelectChat={onSelectChat}
               />,
             )
           }
@@ -58,4 +58,4 @@ class ChatsInfoComponent extends Component<PropsFromContainer & PropsFromState> 
   }
 }
 
-export const ChatsInfo = withStyles(styles as any)(ChatsInfoComponent);
+export const ChatList = withStyles(styles as any)(ChatListComponent);

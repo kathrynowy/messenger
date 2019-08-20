@@ -44,18 +44,22 @@
     max-width: 70%;
 
     &_left, &_right {
-      border-top-right-radius: 15px;
+      
       margin-left: 10px;
     }
 
     &_left {
       background: $yellow-red-gradient;
+      border-top-right-radius: 15px;
       align-self: flex-start;
     }
 
     &_right {
       background: $red-violet-gradient;
+      border-top-left-radius: 15px;
       align-self: flex-end;
+      margin-right: 8px;
+      margin-top: 5px;
     }
   }
 

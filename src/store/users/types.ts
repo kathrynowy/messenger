@@ -1,9 +1,9 @@
-import { Dialogue } from '../dialogues/types';
+import { Chat } from '../chats/types';
 
 export interface User extends ApiResponse {
-  Dialogues: string[];
-  Username: string;
-  UserId: number;
+  chats: string[];
+  username: string;
+  userId: number;
 }
 
 export type ApiResponse = Record<string, any>;

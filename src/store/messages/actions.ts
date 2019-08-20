@@ -1,4 +1,3 @@
-
 import { action } from 'typesafe-actions';
 import { Message, MessagesActionTypes } from './types';
 

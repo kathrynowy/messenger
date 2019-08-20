@@ -7,7 +7,7 @@ import { Store } from 'redux';
 import { History } from 'history';
 import './App.scss';
 import { LoginPage } from './components/Auth';
-import { Dialogues } from './components/Dialogues';
+import { MainPage } from './components/MainPage/MainPage';
 import { ApplicationState } from './store';
 
 interface MainProps {
@@ -21,7 +21,7 @@ const App: React.FC<MainProps> = ({ store, history }) =>  {
       <ConnectedRouter history={history}>
         <div className='app-container'>
           <Switch>
-            <Route exact path='/' component={Dialogues} />
+            <Route exact path='/' component={MainPage} />
             <Route exact path='/login' component={LoginPage} />
             <Route component={() => <div>Not Found</div>} />
           </Switch>

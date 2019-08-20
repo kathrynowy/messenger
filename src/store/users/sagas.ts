@@ -5,12 +5,10 @@ import { UsersActionTypes } from './types';
 
 function* handleFetch() {
   try {
-    // To call async functions, use redux-saga's `call()`.
-    /* const res = yield call(callApi, 'get', API_ENDPOINT, '/heroStats') */
     const res = [{
-      Dialogues : ['5d308fccf3d6a151f00b9bfe'],
-      Username: 'Katya',
-      UserId: 2,
+      chats : ['5d308fccf3d6a151f00b9bfe'],
+      userId: 2,
+      username: 'Katya',
     }];
 
     yield put(fetchSuccess(res));
