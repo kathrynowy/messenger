@@ -4,6 +4,8 @@ export interface Chat extends ApiResponse {
   id: number;
   participants: Participants;
   chatId: number;
+  lastMessageTime: string;
+  lastMessageText: string;
 }
 
 export interface Participants {

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { Search } from '@material-ui/icons';
 import { Chat } from '../../store/chats/types';
-import './ChatList.scss';
 import { ChatListItem } from './ChatListItem/ChatListItem';
+import './ChatList.scss';
 
 const styles = () => ({
   icon: {
@@ -42,12 +42,12 @@ class ChatListComponent extends Component<PropsFromContainer & PropsFromState> {
               <ChatListItem
                 key={chat.chatId}
                 userId={userId ? userId : null}
-                text='gfhgfhfghfg'
+                text={chat.lastMessageText}
+                time={chat.lastMessageTime}
                 chat={chat}
                 isSelected={selectedChat === chat._id}
                 count={6}
                 avatar='https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg'
-                // tslint:disable-next-line: jsx-no-lambda
                 onSelectChat={onSelectChat}
               />,
             )
