@@ -7,9 +7,9 @@ import { MessagesActionTypes } from './types';
 
 function* handleFetch(actionData: AnyAction) {
   try {
-    const { DialogueId } = actionData.payload;
-    const { data } = yield call(() => axios.get(`http://localhost:8000/message/all?dialogueId=${DialogueId}`));
-
+    const { chatId } = actionData.payload;
+    const { data } = yield call(() => axios.get(`http://localhost:8000/message/all?chatId=${chatId}`));
+    console.log('messages', data);
     yield put(fetchSuccess(data));
   } catch (err) {
     if (err instanceof Error) {
@@ -22,16 +22,12 @@ function* handleFetch(actionData: AnyAction) {
 
 function* sendMessage(actionData: AnyAction) {
   try {
-    const { dialogueId, text, userId, toUserId } = actionData.payload;
+    const { chatId, text, user, toUserId } = actionData.payload;
     const time = new Date().getTime();
     const { data } = yield call(() =>
-      axios.post('http://localhost:8000/message/add', {
-        Dialogue: dialogueId,
-        Text: text,
-        User: userId,
-        Time: time,
-      },
+      axios.post('http://localhost:8000/message/add', { chat: chatId, text, user, time },
     ));
+    console.log('send messages', data);
     yield put(sendSuccess(data));
     sendMessageWithSocket(data, toUserId);
   } catch (err) {

@@ -3,9 +3,9 @@ import { History } from 'history';
 import { Action, AnyAction, combineReducers, Dispatch } from 'redux';
 import { all, fork } from 'redux-saga/effects';
 
-import { DialoguesReducer } from './dialogues/reducer';
-import { dialoguesSaga } from './dialogues/sagas';
-import { DialoguesState } from './dialogues/types';
+import { ChatsReducer } from './chats/reducer';
+import { chatsSaga } from './chats/sagas';
+import { ChatsState } from './chats/types';
 import { MessagesReducer } from './messages/reducer';
 import { messagesSaga } from './messages/sagas';
 import { MessagesState } from './messages/types';
@@ -16,7 +16,7 @@ import { UsersState } from './users/types';
 export interface ApplicationState {
   users: UsersState;
   router: RouterState;
-  dialogues: DialoguesState;
+  chats: ChatsState;
   messages: MessagesState;
 }
 
@@ -26,12 +26,12 @@ export interface ConnectedReduxProps<A extends Action = AnyAction> {
 
 export const createRootReducer = (history: History) =>
   combineReducers({
-    dialogues: DialoguesReducer,
+    chats: ChatsReducer,
     messages: MessagesReducer,
     router: connectRouter(history),
     users: usersReducer,
   });
 
 export function* rootSaga() {
-  yield all([fork(usersSaga), fork(dialoguesSaga), fork(messagesSaga)]);
+  yield all([fork(usersSaga), fork(chatsSaga), fork(messagesSaga)]);
 }

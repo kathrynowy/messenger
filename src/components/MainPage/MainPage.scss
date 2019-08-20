@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-.dialogues {
+.main-page {
   display: flex;
   max-width: 1200px;
   width: 90%;
@@ -10,7 +10,7 @@
   margin-top: 160px;
   color: $main-gray-font-color;
 
-  &__choose-dialogue {
+  &__choose-chat {
     background-color: $main-dark-background;
     font-family: $font-family-main;
     line-height: 1.2;
@@ -23,7 +23,7 @@
     margin: auto;
   }
 
-  &__dialogue-container {
+  &__chat-container {
     background-color: $main-background;
     display: flex;
     width: 57%;

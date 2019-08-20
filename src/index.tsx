@@ -2,7 +2,6 @@ import { createHashHistory } from 'history';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import openSocket from 'socket.io-client';
 import { App } from './App';
 import configureStore from './configureStore';
 import './index.scss';

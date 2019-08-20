@@ -4,36 +4,36 @@ import { RouteComponentProps } from 'react-router-dom';
 
 import { sendUserId } from '../../socket';
 import { ApplicationState, ConnectedReduxProps } from '../../store';
-import { fetchDialogues } from '../../store/dialogues/actions';
-import { DialoguesState } from '../../store/dialogues/types';
+import { fetchChats } from '../../store/chats/actions';
+import { ChatsState } from '../../store/chats/types';
 import { fetchMessages, sendMessage } from '../../store/messages/actions';
 import { MessagesState } from '../../store/messages/types';
 import { fetchRequest } from '../../store/users/actions';
 import { User } from '../../store/users/types';
-import { Chat } from '../Chat/Chat';
-import { ChatsInfo } from '../ChatsInfo/ChatsInfo';
+import { ChatList } from '../ChatList/ChatList';
+import { ChatRoom } from '../ChatRoom/ChatRoom';
 import { Panel } from '../Panel/Panel';
-import './index.scss';
+import './MainPage.scss';
 
 interface PropsFromState {
   loading: boolean;
   users: User[];
-  dialogues: DialoguesState;
+  chats: ChatsState;
   errors?: string;
   classes: any;
-  currentDialogue: number;
+  currentChat: number;
   messages: MessagesState;
 }
 
 interface PropsFromDispatch {
   fetchRequest: typeof fetchRequest;
-  fetchDialogues: typeof fetchDialogues;
+  fetchChats: typeof fetchChats;
   fetchMessages: typeof fetchMessages;
   sendMessage: typeof sendMessage;
 }
 
 interface State {
-  selectedDialogue: string;
+  selectedChat: string;
   message: string;
   userId: string;
 }
@@ -44,28 +44,28 @@ type AllProps = State &
   RouteComponentProps<{}> &
   ConnectedReduxProps;
 
-class DialoguesComponent extends Component<AllProps> {
+class MainPageContainer extends Component<AllProps> {
     public state = {
       message: '',
-      selectedDialogue: '',
+      selectedChat: '',
       userId: localStorage.getItem('userId'),
     };
 
   public messagesEnd: any;
 
   public componentDidMount() {
-    this.props.fetchDialogues({ userId: this.state.userId });
+    this.props.fetchChats({ userId: this.state.userId });
     sendUserId(this.state.userId);
     this.props.fetchRequest();
-    this.state.selectedDialogue ? this.props.fetchMessages({ DialogueId: this.state.selectedDialogue }) : null;
+    this.state.selectedChat ? this.props.fetchMessages({ chatId: this.state.selectedChat }) : null;
   }
 
-  public onSelectDialogue = (dialogueId: string) => {
+  public onSelectChat = (chatId: string) => {
     this.setState({
-      selectedDialogue: dialogueId,
+      selectedChat: chatId,
     });
 
-    this.props.fetchMessages({ DialogueId: dialogueId });
+    this.props.fetchMessages({ chatId });
   }
 
   public onTypeMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,17 +75,16 @@ class DialoguesComponent extends Component<AllProps> {
   }
 
   public sendMessage = () => {
-    const currentDialogue = this.props.dialogues.data.find((dialogue) => dialogue._id === this.state.selectedDialogue);
-    const to = (currentDialogue.Between as any).To;
-    const from = (currentDialogue.Between as any).From;
-
+    const currentChat = this.props.chats.data.find((chat) => chat._id === this.state.selectedChat);
+    const to = currentChat.participants.to;
+    const from = currentChat.participants.from;
     const toUser = this.state.userId === to._id ? from._id : to._id;
 
     this.props.sendMessage({
-      dialogueId: this.state.selectedDialogue,
+      chatId: this.state.selectedChat,
       text: this.state.message,
       toUserId: toUser,
-      userId: this.state.userId,
+      user: this.state.userId,
     });
 
     this.setState({
@@ -94,38 +93,38 @@ class DialoguesComponent extends Component<AllProps> {
   }
 
   public render() {
-    const { dialogues, messages } = this.props;
+    const { chats, messages } = this.props;
 
     return (
-      <div className='dialogues'>
+      <div className='main-page'>
         <Panel
           name='Katya'
           avatar='https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg'
         />
 
-        <ChatsInfo
-          dialogues={dialogues.data}
+        <ChatList
+          chats={chats.data}
           userId={this.state.userId}
-          selectedDialogue={this.state.selectedDialogue}
-          onSelectDialogue={this.onSelectDialogue}
+          selectedChat={this.state.selectedChat}
+          onSelectChat={this.onSelectChat}
         />
 
-        <div className='dialogues__dialogue-container'>
+        <div className='main-page__chat-container'>
           {
-            this.state.selectedDialogue && (
-              <Chat
+            this.state.selectedChat && (
+              <ChatRoom
                 messages={messages.data}
                 userId={this.state.userId}
                 message={this.state.message}
                 onTypeMessage={this.onTypeMessage}
                 sendMessage={this.sendMessage}
-                selectedDialogue={this.state.selectedDialogue}
+                selectedChat={this.state.selectedChat}
               />
             )
           }
           {
-            !this.state.selectedDialogue && (
-              <div className='dialogues__choose-dialogue'>
+            !this.state.selectedChat && (
+              <div className='main-page__choose-chat'>
                 Please select a chat to start messaging
               </div>
             )
@@ -136,8 +135,8 @@ class DialoguesComponent extends Component<AllProps> {
   }
 }
 
-const mapStateToProps = ({ users, dialogues, messages }: ApplicationState) => ({
-  dialogues,
+const mapStateToProps = ({ users, chats, messages }: ApplicationState) => ({
+  chats,
   errors: users.errors,
   loading: users.loading,
   messages,
@@ -145,13 +144,13 @@ const mapStateToProps = ({ users, dialogues, messages }: ApplicationState) => ({
 });
 
 const mapDispatchToProps = {
-  fetchDialogues,
+  fetchChats,
   fetchMessages,
   fetchRequest,
   sendMessage,
 };
 
-export const Dialogues = connect(
+export const MainPage = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(DialoguesComponent);
+)(MainPageContainer);

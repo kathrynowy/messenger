@@ -1,8 +1,8 @@
 export interface Message extends ApiResponse {
-  Dialogue: string;
-  Text: string;
-  User: string;
-  Time: number;
+  chat: string;
+  text: string;
+  user: string;
+  time: number;
 }
 
 export type ApiResponse = Record<string, any>;
