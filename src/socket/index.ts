@@ -4,7 +4,7 @@ import { sendSuccess } from '../store/messages/actions';
 
 const socket = io('http://localhost:8000');
 
-const configureSocket = (store) => {
+const configureSocket = (store: any) => {
   socket.on('connect', () => {
     console.log('connected');
   });

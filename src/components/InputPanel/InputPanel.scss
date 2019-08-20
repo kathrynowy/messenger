@@ -1,0 +1,37 @@
+@import '../../styles/variables.scss';
+
+.input-panel {
+  display: flex;
+  background-color: $main-dark-background;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 15px;
+  max-height: 70px;
+
+  &__icon {
+    width: 30px;
+    height: 30px;
+    font-weight: 300px;
+    cursor: pointer;
+  }
+
+  &__input {
+    background-color: $transparent;
+    border: none;
+    padding: 5px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-family: $font-family-main;
+    width: 80%;
+    color: $main-gray-font-color;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $main-gray-font-color;
+    }
+  }
+}

@@ -8,7 +8,7 @@ function* handleFetch() {
     // To call async functions, use redux-saga's `call()`.
     /* const res = yield call(callApi, 'get', API_ENDPOINT, '/heroStats') */
     const res = [{
-      Dialogues: ['5d308fccf3d6a151f00b9bfe'],
+      Dialogues : ['5d308fccf3d6a151f00b9bfe'],
       Username: 'Katya',
       UserId: 2,
     }];
