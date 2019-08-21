@@ -9,7 +9,7 @@ function* handleFetch(actionData: AnyAction) {
   try {
     const { chatId } = actionData.payload;
     const { data } = yield call(() => axios.get(`http://localhost:8000/message/all?chatId=${chatId}`));
-    console.log('messages', data);
+
     yield put(fetchSuccess(data));
   } catch (err) {
     if (err instanceof Error) {
@@ -27,7 +27,7 @@ function* sendMessage(actionData: AnyAction) {
     const { data } = yield call(() =>
       axios.post('http://localhost:8000/message/add', { chat: chatId, text, user, time },
     ));
-    console.log('send messages', data);
+
     yield put(sendSuccess(data));
     sendMessageWithSocket(data, toUserId);
   } catch (err) {

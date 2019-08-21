@@ -7,9 +7,8 @@ import { ChatsActionTypes } from './types';
 function* handleFetch(actionData: AnyAction) {
   try {
     const { userId } = actionData.payload;
-    console.log('fetchhhhhh');
     const { data } = yield call(() => axios.get(`http://localhost:8000/chat/all?userId=${userId}`));
-    console.log('after fetch', data);
+
     yield put(fetchSuccess(data));
   } catch (err) {
     if (err instanceof Error) {
