@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { ApplicationState } from '../../store';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Lock, PermIdentity } from '@material-ui/icons';
+import { signIn } from './../../store/users/actions';
 import './index.scss';
 
 const styles = (theme: any) => ({
@@ -45,9 +48,49 @@ const styles = (theme: any) => ({
 
 interface PropsFromState {
   classes: any;
+  users: any;
+  errors?: string;
+  loading: boolean;
+  history: any;
 }
 
-class Login extends Component<PropsFromState> {
+interface State {
+  username: string;
+  password: string;
+}
+
+interface PropsFromDispatch {
+  signIn: typeof signIn;
+}
+
+class Login extends Component<PropsFromState & State & PropsFromDispatch> {
+  public state = {
+    password: '',
+    username: '',
+  };
+
+  public signIn = async () => {
+    const data = {
+      password: this.state.password,
+      username: this.state.username,
+      history: this.props.history,
+    };
+
+    this.props.signIn(data);
+  }
+
+  public changeUsername = (event: any) => {
+    this.setState({
+      username: event.target.value,
+    });
+  }
+
+  public changePassword = (event: any) => {
+    this.setState({
+      password: event.target.value,
+    });
+  }
+
   public render() {
     const { classes } = this.props;
 
@@ -58,19 +101,33 @@ class Login extends Component<PropsFromState> {
         <div className='login__input-controller'>
           <div>
             <PermIdentity className={classes.userIcon}/>
-            <input className='login__input'/>
+            <input className='login__input' type='text' onChange={this.changeUsername}/>
           </div>
 
           <div>
             <Lock className={classes.lockIcon}/>
-            <input className='login__input' type='password'/>
+            <input className='login__input' type='password' onChange={this.changePassword} />
           </div>
 
-          <button className='login__button'>Sign in</button>
+          <button className='login__button' onClick={this.signIn}>Sign in</button>
+          <button className='login__button' onClick={this.signIn}>Sign up</button>
         </div>
       </div>
     );
   }
 }
 
-export const LoginPage = withStyles(styles as any)(Login);
+const mapStateToProps = ({ users }: ApplicationState) => ({
+  errors: users.errors,
+  loading: users.loading,
+  users: users.data,
+});
+
+const mapDispatchToProps = {
+  signIn,
+};
+
+export const LoginPage = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles as any)(Login));

@@ -140,7 +140,7 @@ const mapStateToProps = ({ users, chats, messages }: ApplicationState) => ({
   errors: users.errors,
   loading: users.loading,
   messages,
-  users: users.data,
+  users,
 });
 
 const mapDispatchToProps = {
