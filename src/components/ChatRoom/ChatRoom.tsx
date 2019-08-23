@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Message } from '../../store/messages/types';
 import { InputPanel } from '../InputPanel/InputPanel';
-import { MessageComponent } from '../Message';
+import { MessageComponent } from '../Message/Message';
 import './ChatRoom.scss';
 
 interface PropsFromContainer {

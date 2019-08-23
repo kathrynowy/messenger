@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './index.scss';
+import './Message.scss';
 
 interface PropsFromContainer {
   text: string;
