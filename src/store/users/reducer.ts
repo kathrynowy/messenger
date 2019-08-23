@@ -19,6 +19,9 @@ const reducer: Reducer<UsersState> = (state = initialState, action) => {
     case UsersActionTypes.SIGN_IN_SUCCESS: {
       return { ...state, loading: false, currentUser: action.payload };
     }
+    case UsersActionTypes.SIGN_UP: {
+      return { ...state, loading: true };
+    }
     case UsersActionTypes.FETCH_SUCCESS: {
       return { ...state, loading: false, data: action.payload };
     }

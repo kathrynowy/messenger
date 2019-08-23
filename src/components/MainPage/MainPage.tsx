@@ -8,8 +8,7 @@ import { fetchChats } from '../../store/chats/actions';
 import { ChatsState } from '../../store/chats/types';
 import { fetchMessages, sendMessage } from '../../store/messages/actions';
 import { MessagesState } from '../../store/messages/types';
-import { fetchRequest } from '../../store/users/actions';
-import { User } from '../../store/users/types';
+import { UsersState } from '../../store/users/types';
 import { ChatList } from '../ChatList/ChatList';
 import { ChatRoom } from '../ChatRoom/ChatRoom';
 import { Panel } from '../Panel/Panel';
@@ -17,7 +16,7 @@ import './MainPage.scss';
 
 interface PropsFromState {
   loading: boolean;
-  users: User[];
+  users: UsersState;
   chats: ChatsState;
   errors?: string;
   classes: any;
@@ -26,7 +25,6 @@ interface PropsFromState {
 }
 
 interface PropsFromDispatch {
-  fetchRequest: typeof fetchRequest;
   fetchChats: typeof fetchChats;
   fetchMessages: typeof fetchMessages;
   sendMessage: typeof sendMessage;
@@ -56,7 +54,6 @@ class MainPageContainer extends Component<AllProps> {
   public componentDidMount() {
     this.props.fetchChats({ userId: this.state.userId });
     sendUserId(this.state.userId);
-    this.props.fetchRequest();
     this.state.selectedChat ? this.props.fetchMessages({ chatId: this.state.selectedChat }) : null;
   }
 
@@ -146,7 +143,6 @@ const mapStateToProps = ({ users, chats, messages }: ApplicationState) => ({
 const mapDispatchToProps = {
   fetchChats,
   fetchMessages,
-  fetchRequest,
   sendMessage,
 };
 

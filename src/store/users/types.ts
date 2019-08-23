@@ -1,5 +1,3 @@
-import { Chat } from '../chats/types';
-
 export interface User extends ApiResponse {
   chats: string[];
   username: string;

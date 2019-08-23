@@ -45,11 +45,16 @@
     font-size: 18px;
   }
 
+  &__button-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+
   &__button {
     height: 56px;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
+    width: 45%;
     border: 0;
     border-radius: 28px;
     background: $red-violet-gradient;

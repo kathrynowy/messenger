@@ -4,7 +4,7 @@ import { ApplicationState } from '../../store';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Lock, PermIdentity } from '@material-ui/icons';
-import { signIn } from './../../store/users/actions';
+import { signIn, signUp } from './../../store/users/actions';
 import './index.scss';
 
 const styles = (theme: any) => ({
@@ -16,9 +16,6 @@ const styles = (theme: any) => ({
     position: 'absolute',
     top: '52px',
     width: '30px',
-  },
-  nested: {
-    paddingLeft: theme.spacing.unit * 4,
   },
   root: {
     backgroundColor: theme.palette.background.paper,
@@ -61,6 +58,7 @@ interface State {
 
 interface PropsFromDispatch {
   signIn: typeof signIn;
+  signUp: typeof signUp;
 }
 
 class Login extends Component<PropsFromState & State & PropsFromDispatch> {
@@ -71,12 +69,22 @@ class Login extends Component<PropsFromState & State & PropsFromDispatch> {
 
   public signIn = async () => {
     const data = {
+      history: this.props.history,
       password: this.state.password,
       username: this.state.username,
-      history: this.props.history,
     };
 
     this.props.signIn(data);
+  }
+
+  public signUp = async () => {
+    const data = {
+      history: this.props.history,
+      password: this.state.password,
+      username: this.state.username,
+    };
+
+    this.props.signUp(data);
   }
 
   public changeUsername = (event: any) => {
@@ -109,8 +117,10 @@ class Login extends Component<PropsFromState & State & PropsFromDispatch> {
             <input className='login__input' type='password' onChange={this.changePassword} />
           </div>
 
-          <button className='login__button' onClick={this.signIn}>Sign in</button>
-          <button className='login__button' onClick={this.signIn}>Sign up</button>
+          <div className='login__button-container'>
+            <button className='login__button' onClick={this.signIn}>Sign in</button>
+            <button className='login__button' onClick={this.signUp}>Sign up</button>
+          </div>
         </div>
       </div>
     );
@@ -125,6 +135,7 @@ const mapStateToProps = ({ users }: ApplicationState) => ({
 
 const mapDispatchToProps = {
   signIn,
+  signUp,
 };
 
 export const LoginPage = connect(

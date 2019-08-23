@@ -2,8 +2,6 @@
 import { action } from 'typesafe-actions';
 import { User, UsersActionTypes } from './types';
 
-export const fetchRequest = () => action(UsersActionTypes.FETCH_REQUEST);
-
 export const signIn = (user: any) => action(UsersActionTypes.SIGN_IN, user);
 
 export const signInSuccess = (data: any) => action(UsersActionTypes.SIGN_IN_SUCCESS, data);
