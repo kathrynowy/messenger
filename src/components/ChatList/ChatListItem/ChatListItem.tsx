@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import classnames from 'classnames';
 import { Chat } from '../../../store/chats/types';
 import './ChatListItem.scss';
 
@@ -20,9 +21,11 @@ class ChatListItem extends Component<PropsFromContainer> {
     const to = chat.participants.to;
     const from = chat.participants.from;
     const username = userId === to._id ? from.username : to.username;
+    const chatClass = classnames('chat', { 'chat_selected': isSelected });
+    const chatCountClass = classnames('chat__count', { 'chat__count_selected': isSelected });
 
     return (
-      <div className={isSelected ? 'chat chat_selected' : 'chat'} onClick={() => onSelectChat(chat._id)}>
+      <div className={chatClass} onClick={() => onSelectChat(chat._id)}>
         <img className='chat__avatar' src={avatar}/>
 
         <div className='chat__msg-info'>
@@ -36,7 +39,7 @@ class ChatListItem extends Component<PropsFromContainer> {
             new Date(+time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
           }
           </div>
-          <div className={isSelected ? 'chat__count chat__count_selected' : 'chat__count'}>{count}</div>
+          <div className={chatCountClass}>{count}</div>
         </div>
      </div>
     );
