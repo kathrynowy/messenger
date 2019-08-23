@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import classnames from 'classnames';
 import './Message.scss';
 
 interface PropsFromContainer {
@@ -12,17 +13,20 @@ interface PropsFromContainer {
 class MessageComponent extends Component<PropsFromContainer> {
   public render() {
     const { text, avatar, isAuthor, time } = this.props;
+    const msgClass = classnames('message', { 'message_right': isAuthor, 'message_left': isAuthor });
+    const textClass = classnames('message__text', { 'message__text_right': isAuthor, 'message__text_left': isAuthor });
+    const dateClass = classnames('message__date', { 'message__date_right': isAuthor, 'message__date_left': isAuthor });
 
     return (
-      <div className={`message ${isAuthor ? 'message_right' : 'message_left'}`}>
+      <div className={msgClass}>
         <img className='message__avatar' src={avatar}/>
 
         <div className='message__info'>
-          <div  className={`message__text ${isAuthor ? 'message__text_right' : 'message__text_left'}`}>
+          <div  className={textClass}>
             {text}
           </div>
 
-          <div className={`message__date ${isAuthor ? 'message__date_right' : 'message__date_left'}`}>
+          <div className={dateClass}>
           {
             new Date(time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
           }

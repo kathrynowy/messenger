@@ -14,6 +14,7 @@
       "spaces",
       2
     ],
+    "object-literal-key-quotes": [true, "consistent"],
     "no-console": [
       true,
       "debug",

@@ -6,7 +6,7 @@ import { Store } from 'redux';
 
 import { History } from 'history';
 import './App.scss';
-import { LoginPage } from './components/Auth';
+import { LoginPage } from './components/LoginPage/LoginPage';
 import { MainPage } from './components/MainPage/MainPage';
 import { ApplicationState } from './store';
 

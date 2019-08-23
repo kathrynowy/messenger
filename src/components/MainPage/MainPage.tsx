@@ -54,7 +54,10 @@ class MainPageContainer extends Component<AllProps> {
   public componentDidMount() {
     this.props.fetchChats({ userId: this.state.userId });
     sendUserId(this.state.userId);
-    this.state.selectedChat ? this.props.fetchMessages({ chatId: this.state.selectedChat }) : null;
+
+    if (this.state.selectedChat) {
+      this.props.fetchMessages({ chatId: this.state.selectedChat });
+    }
   }
 
   public onSelectChat = (chatId: string) => {
