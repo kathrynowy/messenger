@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import classnames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { Search } from '@material-ui/icons';
 import { Chat } from '../../store/chats/types';
@@ -19,6 +20,7 @@ interface PropsFromState {
 }
 
 interface PropsFromContainer {
+  isChatSelected: boolean;
   chats: Chat[];
   userId: string;
   selectedChat: string;
@@ -26,11 +28,16 @@ interface PropsFromContainer {
 }
 
 class ChatListComponent extends Component<PropsFromContainer & PropsFromState> {
+  public state = {
+    selectedChat: '',
+  };
+
   public render() {
-    const { chats, classes, userId, onSelectChat, selectedChat } = this.props;
+    const { chats, classes, userId, onSelectChat, selectedChat, isChatSelected } = this.props;
+    const chatClass = classnames('chats', { 'chats_item-selected': isChatSelected });
 
     return (
-      <div className='chats'>
+      <div className={chatClass}>
         <div className='chats__search'>
           <Search className={classes.icon}/>
           <input type='text' className='chats__input' placeholder='Search in your inbox...'/>

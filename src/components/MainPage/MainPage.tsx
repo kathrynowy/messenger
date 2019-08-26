@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 
+import classnames from 'classnames';
 import { sendUserId } from '../../socket';
 import { ApplicationState, ConnectedReduxProps } from '../../store';
 import { fetchChats } from '../../store/chats/actions';
@@ -34,6 +35,7 @@ interface State {
   selectedChat: string;
   message: string;
   userId: string;
+  isChatSelected: boolean;
 }
 
 type AllProps = State &
@@ -44,6 +46,7 @@ type AllProps = State &
 
 class MainPageContainer extends Component<AllProps> {
     public state = {
+      isChatSelected: false,
       message: '',
       selectedChat: '',
       userId: localStorage.getItem('userId'),
@@ -62,6 +65,7 @@ class MainPageContainer extends Component<AllProps> {
 
   public onSelectChat = (chatId: string) => {
     this.setState({
+      isChatSelected: true,
       selectedChat: chatId,
     });
 
@@ -92,14 +96,26 @@ class MainPageContainer extends Component<AllProps> {
     });
   }
 
+  public backToChats = () => {
+    this.setState({
+      isChatSelected: false,
+      selectedChat: '',
+    });
+  }
+
   public render() {
     const { chats, messages } = this.props;
+    const roomClass = classnames(
+      'main-page__chat-container',
+      { 'main-page__chat-container_selected': this.state.isChatSelected },
+    );
 
     return (
       <div className='main-page'>
         <Panel
           name='Katya'
           avatar='https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg'
+          isChatSelected={this.state.isChatSelected}
         />
 
         <ChatList
@@ -107,18 +123,21 @@ class MainPageContainer extends Component<AllProps> {
           userId={this.state.userId}
           selectedChat={this.state.selectedChat}
           onSelectChat={this.onSelectChat}
+          isChatSelected={this.state.isChatSelected}
         />
 
-        <div className='main-page__chat-container'>
+        <div className={roomClass}>
           {
             this.state.selectedChat && (
               <ChatRoom
+                backToChats={this.backToChats}
                 messages={messages.data}
                 userId={this.state.userId}
                 message={this.state.message}
                 onTypeMessage={this.onTypeMessage}
                 sendMessage={this.sendMessage}
                 selectedChat={this.state.selectedChat}
+                isChatSelected={this.state.isChatSelected}
               />
             )
           }

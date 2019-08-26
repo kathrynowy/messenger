@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 
+import classnames from 'classnames';
 import { Settings } from '@material-ui/icons';
 import './Panel.scss';
 
 interface PropsFromContainer {
   name: string;
   avatar: string;
+  isChatSelected: boolean;
 }
 
 class Panel extends Component<PropsFromContainer> {
   public render() {
-    const { name, avatar } = this.props;
+    const { name, avatar, isChatSelected } = this.props;
+    const panelClass = classnames('panel', { 'panel_selected': isChatSelected });
 
     return (
-      <div className='panel'>
+      <div className={panelClass}>
           <div className='panel__user'>
             <img
               src={avatar}

@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 
+import classnames from 'classnames';
 import { Message } from '../../store/messages/types';
 import { InputPanel } from '../InputPanel/InputPanel';
 import { MessageComponent } from '../Message/Message';
 import './ChatRoom.scss';
 
 interface PropsFromContainer {
+  isChatSelected: boolean;
   messages: Message[];
   message: string;
   userId: string;
   selectedChat: string;
+  backToChats(): void;
   onTypeMessage(event: React.ChangeEvent<HTMLInputElement>): void;
   sendMessage(): void;
 }
@@ -33,10 +36,12 @@ class ChatRoom extends Component<PropsFromContainer> {
   }
 
   public render() {
-    const { messages, userId, onTypeMessage, sendMessage, message } = this.props;
+    const { messages, userId, onTypeMessage, sendMessage, message, isChatSelected, backToChats } = this.props;
+    const roomClass = classnames('chat-room', { 'chat-room_item-selected': isChatSelected});
 
     return (
-      <div className='chat-room'>
+      <div className={roomClass}>
+        <div className='chat-room__user-info' onClick={backToChats}> back to Chats </div>
         <div className='chat-room__messages' ref={(div) => this.messagesEnd = div}>
           {
             messages.map((messageInfo) =>
