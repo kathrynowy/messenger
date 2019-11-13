@@ -22,3 +22,11 @@
     }
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .chat-room {
+    &__messages {
+      padding: 0 5px;
+    }
+  }
+}

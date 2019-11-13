@@ -1,6 +1,7 @@
 import { Reducer } from 'redux';
 import { UsersActionTypes, UsersState } from './types';
 
+
 export const initialState: UsersState = {
   currentUser: null,
   data: [],
@@ -12,6 +13,12 @@ const reducer: Reducer<UsersState> = (state = initialState, action) => {
   switch (action.type) {
     case UsersActionTypes.GET_USER: {
       return { ...state, loading: true };
+    }
+    case UsersActionTypes.GET_USERS: {
+      return { ...state, loading: true };
+    }
+    case UsersActionTypes.GET_USERS_SUCCESS: {
+      return { ...state, loading: false, users: action.payload };
     }
     case UsersActionTypes.SIGN_IN: {
       return { ...state, loading: true };
@@ -33,5 +40,6 @@ const reducer: Reducer<UsersState> = (state = initialState, action) => {
     }
   }
 };
+
 
 export { reducer as usersReducer };

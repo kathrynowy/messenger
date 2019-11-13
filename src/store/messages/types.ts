@@ -13,6 +13,7 @@ export enum MessagesActionTypes {
   FETCH_ERROR = '@@messages/FETCH_ERROR',
   SEND_MESSAGE = '@@messages/SEND_MESSAGE',
   SEND_SUCCESS = '@@messages/SEND_SUCCESS',
+  SEND_TO_NEW_CHAT_SUCCESS = '@@messages/SEND_TO_NEW_CHAT_SUCCESS',
 }
 
 export interface MessagesState {

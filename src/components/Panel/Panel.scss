@@ -3,7 +3,7 @@
 .panel {
   display: flex;
   justify-content: space-between;
-  width: 7%;
+  width: 55px;
   flex-direction: column;
   padding: 15px 5px;
   
@@ -33,5 +33,13 @@
     cursor: pointer;
     display: flex;
     align-self: center;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .panel {
+    &_selected {
+      display: none;
+    }
   }
 }

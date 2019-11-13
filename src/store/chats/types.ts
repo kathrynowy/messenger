@@ -19,6 +19,9 @@ export enum ChatsActionTypes {
   FETCH_CHATS = '@@chats/FETCH_CHATS',
   FETCH_SUCCESS = '@@chats/FETCH_SUCCESS',
   FETCH_ERROR = '@@chats/FETCH_ERROR',
+  ADD_CHAT = '@@chats/ADD_CHAT',
+  ADD_CHAT_SUCCESS = '@@chats/ADD_CHAT_SUCCESS',
+  CHANGE_LAST_MESSAGE = '@@chats/CHANGE_LAST_MESSAGE'
 }
 
 export interface ChatsState {

@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 
+import classnames from 'classnames';
 import { Message } from '../../store/messages/types';
 import { InputPanel } from '../InputPanel/InputPanel';
 import { MessageComponent } from '../Message/Message';
 import './ChatRoom.scss';
 
+
 interface PropsFromContainer {
+  isChatSelected: boolean;
+  isNewChat: boolean;
   messages: Message[];
   message: string;
   userId: string;
   selectedChat: string;
+  backToChats(): void;
   onTypeMessage(event: React.ChangeEvent<HTMLInputElement>): void;
   sendMessage(): void;
 }
 
 class ChatRoom extends Component<PropsFromContainer> {
-  public componentDidMount() {
-    this.scrollToBottom();
-  }
+  private messagesEnd: {
+    scrollHeight: number,
+    clientHeight: number,
+    scrollTop: number
+  };
 
   public componentDidUpdate() {
     this.scrollToBottom();
@@ -25,19 +32,18 @@ class ChatRoom extends Component<PropsFromContainer> {
 
   public scrollToBottom = () => {
     if (this.props.selectedChat) {
-      const scrollHeight = this.messagesEnd.scrollHeight;
-      const height = this.messagesEnd.clientHeight;
-      const maxScrollTop = scrollHeight - height;
-      this.messagesEnd.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+      this.messagesEnd.scrollTop = this.messagesEnd.scrollHeight - this.messagesEnd.clientHeight;
     }
   }
 
   public render() {
-    const { messages, userId, onTypeMessage, sendMessage, message } = this.props;
+    const { messages, userId, onTypeMessage, sendMessage, message, isChatSelected, backToChats } = this.props;
+    const roomClass = classnames('chat-room', { 'chat-room_item-selected': isChatSelected});
 
     return (
-      <div className='chat-room'>
-        <div className='chat-room__messages' ref={(div) => this.messagesEnd = div}>
+      <div className={roomClass}>
+        <div className='chat-room__user-info' onClick={backToChats}> back to Chats </div>
+        <div className={'chat-room__messages'} ref={(div) => this.messagesEnd = div}>
           {
             messages.map((messageInfo) =>
               <MessageComponent

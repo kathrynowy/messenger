@@ -14,6 +14,8 @@ export enum UsersActionTypes {
   SIGN_UP = '@@users/SIGN_UP',
   SIGN_IN = '@@users/SIGN_IN',
   SIGN_IN_SUCCESS = '@@users/SIGN_IN_SUCCESS',
+  GET_USERS = '@@users/GET_USERS',
+  GET_USERS_SUCCESS = '@@users/GET_USERS_SUCCESS'
 }
 
 export interface UsersState {

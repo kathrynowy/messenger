@@ -13,9 +13,9 @@ interface PropsFromContainer {
 class MessageComponent extends Component<PropsFromContainer> {
   public render() {
     const { text, avatar, isAuthor, time } = this.props;
-    const msgClass = classnames('message', { 'message_right': isAuthor, 'message_left': isAuthor });
-    const textClass = classnames('message__text', { 'message__text_right': isAuthor, 'message__text_left': isAuthor });
-    const dateClass = classnames('message__date', { 'message__date_right': isAuthor, 'message__date_left': isAuthor });
+    const msgClass = classnames('message', { 'message_right': isAuthor, 'message_left': !isAuthor });
+    const textClass = classnames('message__text', { 'message__text_right': isAuthor, 'message__text_left': !isAuthor });
+    const dateClass = classnames('message__date', { 'message__date_right': isAuthor, 'message__date_left': !isAuthor });
 
     return (
       <div className={msgClass}>
