@@ -14,6 +14,7 @@ export enum MessagesActionTypes {
   SEND_MESSAGE = '@@messages/SEND_MESSAGE',
   SEND_SUCCESS = '@@messages/SEND_SUCCESS',
   SEND_TO_NEW_CHAT_SUCCESS = '@@messages/SEND_TO_NEW_CHAT_SUCCESS',
+  CLEAR_MESSAGES = '@@messages/CLEAR_MESSAGES'
 }
 
 export interface MessagesState {

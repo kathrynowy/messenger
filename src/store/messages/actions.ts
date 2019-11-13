@@ -11,4 +11,6 @@ export const sendToNewChatSuccess = (data: Message) => action(MessagesActionType
 
 export const sendSuccess = (data: Message) => action(MessagesActionTypes.SEND_SUCCESS, data);
 
+export const clearMessages = () => action(MessagesActionTypes.CLEAR_MESSAGES);
+
 export const fetchError = (message: string) => action(MessagesActionTypes.FETCH_ERROR, message);

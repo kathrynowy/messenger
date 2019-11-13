@@ -30,6 +30,9 @@ const reducer: Reducer<MessagesState> = (state = initialState, action) => {
     case MessagesActionTypes.FETCH_ERROR: {
       return { ...state, loading: false, errors: action.payload };
     }
+    case MessagesActionTypes.CLEAR_MESSAGES: {
+      return { ...state, loading: false, data: [] };
+    }
     default: {
       return state;
     }

@@ -12,25 +12,20 @@ interface PropsFromContainer {
   isChatSelected: boolean;
 }
 
-class Panel extends Component<PropsFromContainer> {
-  public render() {
-    const { name, avatar, isChatSelected } = this.props;
-    const panelClass = classnames('panel', { 'panel_selected': isChatSelected });
+const Panel: React.SFC<PropsFromContainer> = (props: any) => {
+  const panelClass = classnames('panel', { 'panel_selected': props.isChatSelected });
 
-    return (
-      <div className={panelClass}>
-          <div className='panel__user'>
-            <img
-              src={avatar}
-              className='panel__avatar'
-            />
-            <span className='panel__name'> {name} </span>
-          </div>
+  return (
+    <div className={panelClass}>
+      <div className='panel__user'>
+        <img src={props.avatar} className='panel__avatar'/>
+        <span className='panel__name'> {props.name} </span>
+      </div>
 
-          <Settings className='panel__icon'/>
-        </div>
-    );
-  }
+      <Settings className='panel__icon'/>
+    </div>
+  );
 }
+
 
 export { Panel };

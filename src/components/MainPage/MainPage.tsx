@@ -7,7 +7,7 @@ import { sendUserId } from '../../socket';
 import { ApplicationState, ConnectedReduxProps } from '../../store';
 import { addChat, fetchChats } from '../../store/chats/actions';
 import { ChatsState } from '../../store/chats/types';
-import { fetchMessages, sendMessage } from '../../store/messages/actions';
+import { fetchMessages, sendMessage, clearMessages } from '../../store/messages/actions';
 import { MessagesState } from '../../store/messages/types';
 import { getUsers } from '../../store/users/actions';
 import { UsersState } from '../../store/users/types';
@@ -35,6 +35,7 @@ interface PropsFromDispatch {
   fetchMessages: typeof fetchMessages;
   sendMessage: typeof sendMessage;
   getUsers: typeof getUsers;
+  clearMessages: typeof clearMessages;
 }
 
 interface State {
@@ -124,6 +125,8 @@ class MainPageContainer extends Component<AllProps> {
   }
 
   public backToChats = () => {
+    this.props.clearMessages();
+
     this.setState({
       isChatSelected: false,
       isNewChat: false,
@@ -182,6 +185,7 @@ class MainPageContainer extends Component<AllProps> {
                 selectedChat={this.state.selectedChat}
                 isChatSelected={this.state.isChatSelected}
                 isNewChat={this.state.isNewChat}
+                clearMessages={this.props.clearMessages}
               />
             )
           }
@@ -211,7 +215,8 @@ const mapDispatchToProps = {
   fetchChats,
   fetchMessages,
   getUsers,
-  sendMessage
+  sendMessage,
+  clearMessages
 };
 
 
