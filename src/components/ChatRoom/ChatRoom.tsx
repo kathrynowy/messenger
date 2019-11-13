@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { Message } from '../../store/messages/types';
 import { InputPanel } from '../InputPanel/InputPanel';
 import { MessageComponent } from '../Message/Message';
+import { ArrowBackOutlined } from '@material-ui/icons';
 
 import './ChatRoom.scss';
 
@@ -42,8 +43,21 @@ const ChatRoom: React.SFC<PropsFromContainer> = (props: any) => {
 
   return (
     <div className={roomClass}>
-      <div className='chat-room__user-info' onClick={backToChats}> back to Chats </div>
-      <div className={'chat-room__messages'} ref={(div) => messagesEnd = div}>
+      <div className='chat-room__user-panel user-panel'>
+        <ArrowBackOutlined className='user-panel__icon' onClick={backToChats}/>
+        <img src='https://data.whicdn.com/images/169748367/large.jpg' className='user-panel__avatar'/>
+
+        <div className='user-panel__info'>
+          <div className='user-panel__user-info'>
+            <div className='user-panel__name'> Katya </div>
+            <div className='user-panel__status-circle'></div>
+          </div>
+          <div className='user-panel__status-text'> last seen just now </div>
+        </div>
+
+      </div>
+
+      <div className='chat-room__messages' ref={(div) => messagesEnd = div}>
         {
           messages.map((messageInfo) =>
             <MessageComponent
@@ -52,7 +66,7 @@ const ChatRoom: React.SFC<PropsFromContainer> = (props: any) => {
               text={messageInfo.text}
               time={messageInfo.time}
               avatar={'https://data.whicdn.com/images/169748367/large.jpg'}
-            />,
+            />
           )
         }
       </div>
