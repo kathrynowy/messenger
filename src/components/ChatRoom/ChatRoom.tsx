@@ -6,8 +6,10 @@ import { InputPanel } from '../InputPanel/InputPanel';
 import { MessageComponent } from '../Message/Message';
 import './ChatRoom.scss';
 
+
 interface PropsFromContainer {
   isChatSelected: boolean;
+  isNewChat: boolean;
   messages: Message[];
   message: string;
   userId: string;
@@ -18,9 +20,11 @@ interface PropsFromContainer {
 }
 
 class ChatRoom extends Component<PropsFromContainer> {
-  public componentDidMount() {
-    this.scrollToBottom();
-  }
+  private messagesEnd: {
+    scrollHeight: number,
+    clientHeight: number,
+    scrollTop: number
+  };
 
   public componentDidUpdate() {
     this.scrollToBottom();
@@ -28,10 +32,7 @@ class ChatRoom extends Component<PropsFromContainer> {
 
   public scrollToBottom = () => {
     if (this.props.selectedChat) {
-      const scrollHeight = this.messagesEnd.scrollHeight;
-      const height = this.messagesEnd.clientHeight;
-      const maxScrollTop = scrollHeight - height;
-      this.messagesEnd.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+      this.messagesEnd.scrollTop = this.messagesEnd.scrollHeight - this.messagesEnd.clientHeight;
     }
   }
 
@@ -42,7 +43,7 @@ class ChatRoom extends Component<PropsFromContainer> {
     return (
       <div className={roomClass}>
         <div className='chat-room__user-info' onClick={backToChats}> back to Chats </div>
-        <div className='chat-room__messages' ref={(div) => this.messagesEnd = div}>
+        <div className={'chat-room__messages'} ref={(div) => this.messagesEnd = div}>
           {
             messages.map((messageInfo) =>
               <MessageComponent

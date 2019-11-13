@@ -4,10 +4,10 @@
   display: flex;
   max-width: 1200px;
   width: 90%;
-  height: 650px;
+  height: 80%;
   margin: 20px auto;
   justify-content: center;
-  margin-top: 160px;
+  align-self: center;
   color: $main-gray-font-color;
 
   &__choose-chat {

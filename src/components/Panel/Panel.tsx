@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
-import classnames from 'classnames';
 import { Settings } from '@material-ui/icons';
+import classnames from 'classnames';
+
 import './Panel.scss';
+
 
 interface PropsFromContainer {
   name: string;

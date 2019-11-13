@@ -1,11 +1,10 @@
 @import '../../styles/variables.scss';
 
+
 .chats {
   background-color: $main-background;
   width: 30%;
-  padding: 10px;
-  padding-top: 15px;
-  padding-right: 0px;
+  padding: 15px 0px 10px 10px;
   display: flex;
   flex-direction: column;
 
@@ -13,6 +12,37 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+  }
+
+  &__choose-search {
+    display: flex;
+    flex-direction: row;
+    margin: 5px auto;
+    //font-family: "Trebuchet MS", Helvetica, sans-serif;
+  }
+
+  &__search-peoples,
+  &__search-messages {
+    padding: 2px 5px;
+    border-radius: 5px;
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover,
+    &_selected {
+      background: $yellow-red-gradient;
+      font-weight: 800px;
+    }
+
+    &_selected {
+      color: $white;
+    }
+  }
+
+  &__search-peoples,
+  &__search-messages {
+    margin-right: 25px;
   }
 
   &__input {

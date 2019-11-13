@@ -35,6 +35,8 @@
       "check-catch",
       "check-else",
       "check-whitespace"
-    ]
+    ],
+    "trailing-comma": false,
+    "no-consecutive-blank-lines": [true, 2]
   }
 }

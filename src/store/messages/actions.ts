@@ -7,6 +7,8 @@ export const sendMessage = (actionData: any) => action(MessagesActionTypes.SEND_
 
 export const fetchSuccess = (data: Message[]) => action(MessagesActionTypes.FETCH_SUCCESS, data);
 
+export const sendToNewChatSuccess = (data: Message) => action(MessagesActionTypes.SEND_TO_NEW_CHAT_SUCCESS, data);
+
 export const sendSuccess = (data: Message) => action(MessagesActionTypes.SEND_SUCCESS, data);
 
 export const fetchError = (message: string) => action(MessagesActionTypes.FETCH_ERROR, message);

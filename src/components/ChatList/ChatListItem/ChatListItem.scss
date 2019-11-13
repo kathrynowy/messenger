@@ -1,5 +1,6 @@
 @import '../../../styles/variables.scss';
 
+
 .chat {
   display: flex;
   flex-direction: row;
@@ -10,6 +11,7 @@
   padding: 15px 10px;
   border-radius: 5px;
   cursor: pointer;
+  font-family: $font-family-poppins;
 
   &_selected {
     background: $red-violet-gradient;
@@ -31,7 +33,7 @@
   }
 
   &__text, &__name, &__date {
-    font-family: $font-family-main;
+    font-family: $font-family-poppins;
   }
 
   &__text {
@@ -46,22 +48,23 @@
   &__name {
     margin-bottom: 10px;
     margin-left: 5px;
-    font-weight: 600;
+    font-size: 18px;
   }
 
   &__date {
     align-content: flex-end;
-    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: auto;
+    width: 55px;
   }
 
   &__count {
-    margin-top: 10%;
     display: flex;
     align-self: center;
-    margin-top: 25%;
     border-radius: 100%;
     width: 20px;
     height: 20px;
+    font-size: 14px;
     background: $red-violet-gradient;
     justify-content: center;
     align-items: center;

@@ -1,8 +1,10 @@
 import io from 'socket.io-client';
-import { Message } from 'src/store/messages/types';
+import { baseUrl } from '../config';
 import { sendSuccess } from '../store/messages/actions';
+import { Message } from '../store/messages/types';
 
-const socket = io('http://localhost:8000');
+
+const socket = io(baseUrl);
 
 const configureSocket = (store: any) => {
   socket.on('connect', () => {
@@ -19,6 +21,7 @@ const configureSocket = (store: any) => {
 
   return socket;
 };
+
 
 export const sendMessageWithSocket = (message: Message, toUserId: string) => {
   socket.emit('SEND_MESSAGE', { message, toUserId });

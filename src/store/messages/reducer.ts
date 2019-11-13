@@ -1,6 +1,7 @@
 import { Reducer } from 'redux';
 import { MessagesActionTypes, MessagesState } from './types';
 
+
 export const initialState: MessagesState = {
   data: [],
   errors: undefined,
@@ -13,10 +14,15 @@ const reducer: Reducer<MessagesState> = (state = initialState, action) => {
       return { ...state, loading: true };
     }
     case MessagesActionTypes.SEND_MESSAGE: {
-      return { ...state, loading: true };
+      const data = action.payload.isNewChat ? [] : state.data;
+
+      return { ...state, loading: true, data };
     }
     case MessagesActionTypes.SEND_SUCCESS: {
       return { ...state, loading: false, data: [...state.data, action.payload]};
+    }
+    case MessagesActionTypes.SEND_TO_NEW_CHAT_SUCCESS: {
+      return { ...state, loading: false, data: [action.payload]};
     }
     case MessagesActionTypes.FETCH_SUCCESS: {
       return { ...state, loading: false, data: action.payload };
@@ -29,5 +35,6 @@ const reducer: Reducer<MessagesState> = (state = initialState, action) => {
     }
   }
 };
+
 
 export { reducer as MessagesReducer };
