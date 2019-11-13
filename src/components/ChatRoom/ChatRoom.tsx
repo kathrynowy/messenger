@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 
 import classnames from 'classnames';
 import { Message } from '../../store/messages/types';
 import { InputPanel } from '../InputPanel/InputPanel';
 import { MessageComponent } from '../Message/Message';
+
 import './ChatRoom.scss';
 
 
@@ -15,56 +16,55 @@ interface PropsFromContainer {
   userId: string;
   selectedChat: string;
   backToChats(): void;
+  clearMessages(): void;
   onTypeMessage(event: React.ChangeEvent<HTMLInputElement>): void;
   sendMessage(): void;
 }
 
-class ChatRoom extends Component<PropsFromContainer> {
-  private messagesEnd: {
+const ChatRoom: React.SFC<PropsFromContainer> = (props: any) => {
+  const { messages, userId, onTypeMessage, sendMessage, message, isChatSelected, backToChats, clearMessages } = props;
+  const roomClass = classnames('chat-room', { 'chat-room_item-selected': isChatSelected});
+  let messagesEnd: {
     scrollHeight: number,
     clientHeight: number,
     scrollTop: number
   };
 
-  public componentDidUpdate() {
-    this.scrollToBottom();
-  }
+  useLayoutEffect(() => {
+    scrollToBottom();
+  });
 
-  public scrollToBottom = () => {
-    if (this.props.selectedChat) {
-      this.messagesEnd.scrollTop = this.messagesEnd.scrollHeight - this.messagesEnd.clientHeight;
+  let scrollToBottom = () => {
+    if (props.selectedChat) {
+      messagesEnd.scrollTop = messagesEnd.scrollHeight - messagesEnd.clientHeight;
     }
   }
 
-  public render() {
-    const { messages, userId, onTypeMessage, sendMessage, message, isChatSelected, backToChats } = this.props;
-    const roomClass = classnames('chat-room', { 'chat-room_item-selected': isChatSelected});
-
-    return (
-      <div className={roomClass}>
-        <div className='chat-room__user-info' onClick={backToChats}> back to Chats </div>
-        <div className={'chat-room__messages'} ref={(div) => this.messagesEnd = div}>
-          {
-            messages.map((messageInfo) =>
-              <MessageComponent
-                key={messageInfo._id}
-                isAuthor={userId === messageInfo.user}
-                text={messageInfo.text}
-                time={messageInfo.time}
-                avatar={'https://data.whicdn.com/images/169748367/large.jpg'}
-              />,
-            )
-          }
-        </div>
-
-        <InputPanel
-          onTypeMessage={onTypeMessage}
-          message={message}
-          sendMessage={sendMessage}
-        />
+  return (
+    <div className={roomClass}>
+      <div className='chat-room__user-info' onClick={backToChats}> back to Chats </div>
+      <div className={'chat-room__messages'} ref={(div) => messagesEnd = div}>
+        {
+          messages.map((messageInfo) =>
+            <MessageComponent
+              key={messageInfo._id}
+              isAuthor={userId === messageInfo.user}
+              text={messageInfo.text}
+              time={messageInfo.time}
+              avatar={'https://data.whicdn.com/images/169748367/large.jpg'}
+            />,
+          )
+        }
       </div>
-    );
-  }
+
+      <InputPanel
+        onTypeMessage={onTypeMessage}
+        message={message}
+        sendMessage={sendMessage}
+      />
+    </div>
+  );
 }
+
 
 export { ChatRoom };
