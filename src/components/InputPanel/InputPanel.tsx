@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { SendOutlined, SentimentSatisfiedAltOutlined } from '@material-ui/icons';
+import { phrases } from '../../config/phrases';
 
 import './InputPanel.scss';
 
@@ -12,20 +13,22 @@ interface PropsFromContainer {
 }
 
 const InputPanel: React.SFC<PropsFromContainer> = (props: any) => {
+  const { onTypeMessage, message, sendMessage } = props;
+
   return (
     <div className='input-panel'>
       <SentimentSatisfiedAltOutlined className='input-panel__icon'/>
       <input
         type='text'
-        placeholder='Type a message...'
+        placeholder={phrases.messagePlaceholder}
         className='input-panel__input'
-        onChange={props.onTypeMessage}
-        value={props.message}
+        onChange={onTypeMessage}
+        value={message}
       />
-      <SendOutlined className='input-panel__icon' onClick={props.sendMessage}/>
+      <SendOutlined className='input-panel__icon' onClick={sendMessage}/>
     </div>
   );
-}
+};
 
 
 export { InputPanel };

@@ -1,10 +1,10 @@
 import React, { useEffect, useLayoutEffect } from 'react';
 
+import { ArrowBackOutlined } from '@material-ui/icons';
 import classnames from 'classnames';
 import { Message } from '../../store/messages/types';
 import { InputPanel } from '../InputPanel/InputPanel';
 import { MessageComponent } from '../Message/Message';
-import { ArrowBackOutlined } from '@material-ui/icons';
 
 import './ChatRoom.scss';
 
@@ -35,11 +35,11 @@ const ChatRoom: React.SFC<PropsFromContainer> = (props: any) => {
     scrollToBottom();
   });
 
-  let scrollToBottom = () => {
+  const scrollToBottom = () => {
     if (props.selectedChat) {
       messagesEnd.scrollTop = messagesEnd.scrollHeight - messagesEnd.clientHeight;
     }
-  }
+  };
 
   return (
     <div className={roomClass}>
@@ -50,7 +50,7 @@ const ChatRoom: React.SFC<PropsFromContainer> = (props: any) => {
         <div className='user-panel__info'>
           <div className='user-panel__user-info'>
             <div className='user-panel__name'> Katya </div>
-            <div className='user-panel__status-circle'></div>
+            <div className='user-panel__status-circle'/>
           </div>
           <div className='user-panel__status-text'> last seen just now </div>
         </div>
@@ -59,7 +59,7 @@ const ChatRoom: React.SFC<PropsFromContainer> = (props: any) => {
 
       <div className='chat-room__messages' ref={(div) => messagesEnd = div}>
         {
-          messages.map((messageInfo) =>
+          messages.map((messageInfo: any) =>
             <MessageComponent
               key={messageInfo._id}
               isAuthor={userId === messageInfo.user}
@@ -78,7 +78,7 @@ const ChatRoom: React.SFC<PropsFromContainer> = (props: any) => {
       />
     </div>
   );
-}
+};
 
 
 export { ChatRoom };

@@ -10,6 +10,7 @@ import { ChatListItem } from './ChatListItem/ChatListItem';
 import { SearchItem } from './SearchItem/SearchItem';
 
 import './ChatList.scss';
+import { phrases } from 'src/config/phrases';
 
 
 const styles = () => ({
@@ -32,16 +33,16 @@ interface MyProps {
 }
 
 interface PropsFromContainer {
-  isChatSelected: boolean;
-  currentUser: any;
   chats: Chat[];
+  currentUser: any;
+  isChatSelected: boolean;
   isLoading: boolean;
-  users: User[];
-  userId: string;
   selectedChat: string;
-  onSelectChat(chatId: string): void;
-  getUsers(): void;
+  userId: string;
+  users: User[];
   addChat(userId: string): void;
+  getUsers(): void;
+  onSelectChat(chatId: string): void;
 }
 
 class ChatListComponent extends Component<PropsFromContainer & PropsFromState, MyProps> {
@@ -68,19 +69,11 @@ class ChatListComponent extends Component<PropsFromContainer & PropsFromState, M
     }
   }
 
-  public setSearchParameter = (searchParameter: number) => {
-    this.setState({ searchParameter });
-
-    if (searchParameter === SearchParamsEnum.Peoples && !this.state.users.length) {
-      this.props.getUsers();
-    }
-  }
-
-  public getMatch = (word: string, param: string) => {
+  private getMatch = (word: string, param: string) => {
     return word.indexOf(param);
   }
 
-  public search = async (e: any) => {
+  private search = async (e: any) => {
     const query = e.target.value.toLowerCase();
 
     if (this.state.searchParameter === SearchParamsEnum.Messages) {
@@ -109,6 +102,14 @@ class ChatListComponent extends Component<PropsFromContainer & PropsFromState, M
     }
   }
 
+  private setSearchParameter = (searchParameter: number) => {
+    this.setState({ searchParameter });
+
+    if (searchParameter === SearchParamsEnum.Peoples && !this.state.users.length) {
+      this.props.getUsers();
+    }
+  }
+
   public render() {
     const { chats, classes, userId, onSelectChat, selectedChat, isChatSelected, currentUser, addChat } = this.props;
     const chatClass = classnames('chats', { 'chats_item-selected': isChatSelected });
@@ -125,18 +126,23 @@ class ChatListComponent extends Component<PropsFromContainer & PropsFromState, M
       <div className={chatClass}>
         <div className='chats__search'>
           <Search className={classes.icon}/>
-          <input type='text' className='chats__input' placeholder='Search in your inbox...' onChange={this.search}/>
+          <input
+            type='text'
+            className='chats__input'
+            placeholder={phrases.searchInputPlaceholder}
+            onChange={this.search}
+          />
         </div>
         <div className='chats__choose-search'>
           <div
             className={peopleSearchParameter}
-            onClick={() => this.setSearchParameter(SearchParamsEnum.Peoples)}
+            onClick={this.setSearchParameter.bind(this, SearchParamsEnum.Peoples)}
           >
             peoples
           </div>
           <div
             className={messagesSearchParameter}
-            onClick={() => this.setSearchParameter(SearchParamsEnum.Messages)}
+            onClick={this.setSearchParameter.bind(this, SearchParamsEnum.Messages)}
           >
             messages
           </div>
@@ -148,14 +154,14 @@ class ChatListComponent extends Component<PropsFromContainer & PropsFromState, M
               ? ( this.state.sortedChats.map((chat: Chat) => (
                     <ChatListItem
                       key={chat.chatId}
-                      userId={userId ? userId : null}
+                      userId={userId || null}
                       text={chat.lastMessageText}
                       time={chat.lastMessageTime}
                       chat={chat}
                       isSelected={selectedChat === chat._id}
                       count={6}
                       avatar='https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg'
-                      onSelectChat={() => onSelectChat(chat._id)}
+                      onSelectChat={onSelectChat.bind(this, chat._id)}
                     />
                 )))
               : ( this.state.foundUsers.map((user: Chat) => (

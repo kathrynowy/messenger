@@ -2,7 +2,9 @@ import React from 'react';
 
 import classnames from 'classnames';
 import { Chat } from '../../../store/chats/types';
+
 import './ChatListItem.scss';
+
 
 interface PropsFromContainer {
   text: string;
@@ -24,7 +26,7 @@ const ChatListItem: React.SFC<PropsFromContainer> = (props: any) => {
   const chatCountClass = classnames('chat__count', { 'chat__count_selected': isSelected });
 
   return (
-    <div className={chatClass} onClick={() => onSelectChat(chat._id)}>
+    <div className={chatClass} onClick={onSelectChat.bind(this, chat._id)}>
       <img className='chat__avatar' src={avatar}/>
 
       <div className='chat__msg-info'>

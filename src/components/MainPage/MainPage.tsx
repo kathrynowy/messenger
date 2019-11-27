@@ -7,7 +7,7 @@ import { sendUserId } from '../../socket';
 import { ApplicationState, ConnectedReduxProps } from '../../store';
 import { addChat, fetchChats } from '../../store/chats/actions';
 import { ChatsState } from '../../store/chats/types';
-import { fetchMessages, sendMessage, clearMessages } from '../../store/messages/actions';
+import { clearMessages, fetchMessages, sendMessage } from '../../store/messages/actions';
 import { MessagesState } from '../../store/messages/types';
 import { getUsers } from '../../store/users/actions';
 import { UsersState } from '../../store/users/types';
@@ -62,8 +62,6 @@ class MainPageContainer extends Component<AllProps> {
     userId: localStorage.getItem('userId')
   };
 
-  public messagesEnd: any;
-
   public componentDidMount() {
     this.props.fetchChats({ userId: this.state.userId });
     sendUserId(this.state.userId);
@@ -82,7 +80,7 @@ class MainPageContainer extends Component<AllProps> {
     }
   }
 
-  public onSelectChat = (chatId: string) => {
+  private onSelectChat = (chatId: string) => {
     if (this.state.selectedChat === chatId) {
       return;
     }
@@ -95,13 +93,13 @@ class MainPageContainer extends Component<AllProps> {
     });
   }
 
-  public onTypeMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  private onTypeMessage = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       message: event.target.value,
     });
   }
 
-  public sendMessage = async () => {
+  private sendMessage = async () => {
     let toUserId;
 
     if (this.state.isNewChat) {
@@ -124,7 +122,7 @@ class MainPageContainer extends Component<AllProps> {
     this.setState({ message: '' });
   }
 
-  public backToChats = () => {
+  private backToChats = () => {
     this.props.clearMessages();
 
     this.setState({
@@ -135,7 +133,7 @@ class MainPageContainer extends Component<AllProps> {
     });
   }
 
-  public addChat = (userId: string) => {
+  private addChat = (userId: string) => {
     this.setState({
       isChatSelected: true,
       isNewChat: true,
@@ -207,16 +205,16 @@ const mapStateToProps = ({ users, chats, messages }: ApplicationState) => ({
   errors: users.errors,
   loading: users.loading,
   messages,
-  users,
+  users
 });
 
 const mapDispatchToProps = {
   addChat,
+  clearMessages,
   fetchChats,
   fetchMessages,
   getUsers,
-  sendMessage,
-  clearMessages
+  sendMessage
 };
 
 

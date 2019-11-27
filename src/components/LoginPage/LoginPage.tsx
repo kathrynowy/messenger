@@ -67,7 +67,7 @@ class Login extends Component<PropsFromState & State & PropsFromDispatch> {
     username: '',
   };
 
-  public signIn = async () => {
+  private signIn = async () => {
     const data = {
       history: this.props.history,
       password: this.state.password,
@@ -77,7 +77,7 @@ class Login extends Component<PropsFromState & State & PropsFromDispatch> {
     this.props.signIn(data);
   }
 
-  public signUp = async () => {
+  private signUp = async () => {
     const data = {
       history: this.props.history,
       password: this.state.password,
@@ -87,15 +87,15 @@ class Login extends Component<PropsFromState & State & PropsFromDispatch> {
     this.props.signUp(data);
   }
 
-  public changeUsername = (event: any) => {
+  private changeUsername = (event: any) => {
     this.setState({
-      username: event.target.value,
+      username: event.target.value
     });
   }
 
-  public changePassword = (event: any) => {
+  private changePassword = (event: any) => {
     this.setState({
-      password: event.target.value,
+      password: event.target.value
     });
   }
 
