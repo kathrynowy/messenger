@@ -1,12 +1,12 @@
-@import '../../styles/variables.scss';
+@import '../../styles/variables';
 
 .input-panel {
   display: flex;
-  background-color: $main-dark-background;
-  align-items: center;
   justify-content: space-between;
-  padding: 0px 15px;
+  align-items: center;
   max-height: 70px;
+  padding: 0 15px;
+  background-color: $main-dark-background;
 
   &__icon {
     width: 30px;
@@ -16,15 +16,15 @@
   }
 
   &__input {
-    background-color: $transparent;
-    border: none;
-    padding: 5px 10px;
-    margin: 8px 0;
     box-sizing: border-box;
+    width: 80%;
+    margin: 8px 0;
+    padding: 5px 10px;
+    color: $main-gray-font-color;
     font-size: 18px;
     font-family: $font-family-main;
-    width: 80%;
-    color: $main-gray-font-color;
+    background-color: $transparent;
+    border: 0;
 
     &:focus {
       outline: none;

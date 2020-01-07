@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import '../../styles/variables';
 
 .chat-room {
   display: flex;
@@ -6,28 +6,28 @@
   width: 100%;
 
   .user-panel {
-    min-height: 70px;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    min-height: 70px;
     font-family: $font-family-poppins;
     background-color: $main-dark-background;
-    align-items: center;
 
     &__icon {
-      width: 40px;
-      height: 30px;
-      font-weight: 300px;
-      cursor: pointer;
       display: flex;
       align-self: center;
+      width: 40px;
+      height: 30px;
       margin-right: 5px;
+      font-weight: 300px;
+      cursor: pointer;
     }
 
     &__info {
       display: flex;
       flex-direction: column;
-      padding-left: 7px;
       padding-top: 5px;
+      padding-left: 7px;
     }
 
     &__user-info {
@@ -36,8 +36,8 @@
     }
 
     &__avatar {
-      height: 50px;
       width: 50px;
+      height: 50px;
       border-radius: 100%;
     }
 
@@ -47,23 +47,23 @@
     }
 
     &__status-circle {
-      height: 10px;
       width: 10px;
-      border-radius: 100%;
+      height: 10px;
       background-color: #adff2f;
+      border-radius: 100%;
     }
 
     &__status-text {
-      font-size: 10px;
       color: $message-date;
+      font-size: 10px;
     }
   }
 
   &__messages {
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     padding-right: 20px;
-    flex-grow: 1;
     overflow: auto;
 
     &::-webkit-scrollbar {
@@ -76,9 +76,10 @@
     }
   }
 }
-
 @media only screen and (max-width: 500px) {
+
   .chat-room {
+
     &__messages {
       padding: 0 5px;
     }

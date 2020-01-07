@@ -1,11 +1,11 @@
-@import '../../styles/variables.scss';
+@import '../../styles/variables';
 
 .message {
-  background: transparent;
-  max-height: 200px;
   display: flex;
   flex-direction: row;
+  max-height: 200px;
   margin: 10px;
+  background: transparent;
 
   &_left {
     flex-direction: row;
@@ -18,51 +18,51 @@
   &__info {
     display: flex;
     flex-direction: column;
-    min-height: 70px;
     min-width: 70px;
+    min-height: 70px;
   }
 
   &__avatar {
-    height: 50px;
     width: 50px;
+    height: 50px;
     border-radius: 100%;
   }
 
   &__text {
+    display: flex;
+    align-items: center;
+    max-width: 70%;
     min-height: 35px;
+    margin-bottom: 4px;
     padding: 8px 15px;
     color: $message-text;
     font-size: 18px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 4px;
-    line-height: 1.2;
     font-family: $font-family-message;
+    line-height: 1.2;
     word-break: break-word;
-    max-width: 70%;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 
     &_left {
+      align-self: flex-start;
       margin-left: 10px;
       background: $yellow-red-gradient;
       border-top-right-radius: 15px;
-      align-self: flex-start;
     }
 
     &_right {
+      align-self: flex-end;
+      margin-top: 5px;
+      margin-right: 10px;
       background: $red-violet-gradient;
       border-top-left-radius: 15px;
-      align-self: flex-end;
-      margin-right: 10px;
-      margin-top: 5px;
     }
   }
 
   &__date {
+    display: flex;
     color: $message-date;
     font-size: 14px;
-    display: flex;
 
     &_right {
       align-self: flex-end;
