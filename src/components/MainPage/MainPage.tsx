@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import classnames from 'classnames';
 import { sendUserId } from '../../socket';
 import { ApplicationState, ConnectedReduxProps } from '../../store';
-import { addChat, fetchChats } from '../../store/chats/actions';
+import { addChat, fetchChats, clearUnreadMessages } from '../../store/chats/actions';
 import { ChatsState } from '../../store/chats/types';
 import { clearMessages, fetchMessages, sendMessage } from '../../store/messages/actions';
 import { MessagesState } from '../../store/messages/types';
@@ -15,6 +15,7 @@ import { ChatList } from '../ChatList/ChatList';
 import { ChatRoom } from '../ChatRoom/ChatRoom';
 import { Panel } from '../Panel/Panel';
 import { Chat } from './../../store/chats/types';
+import { User } from './../../store/users/types';
 
 import './MainPage.scss';
 
@@ -27,12 +28,14 @@ interface PropsFromState {
   classes: any;
   currentChat: number;
   messages: MessagesState;
+  currentInterlocutor: User;
 }
 
 interface PropsFromDispatch {
   addChat: typeof addChat;
   fetchChats: typeof fetchChats;
   fetchMessages: typeof fetchMessages;
+  clearUnreadMessages: typeof clearUnreadMessages;
   sendMessage: typeof sendMessage;
   getUsers: typeof getUsers;
   clearMessages: typeof clearMessages;
@@ -46,7 +49,8 @@ interface State {
   currentUser: any;
 }
 
-type AllProps = State &
+type AllProps =
+  State &
   PropsFromState &
   PropsFromDispatch &
   RouteComponentProps<{}> &
@@ -54,6 +58,7 @@ type AllProps = State &
 
 class MainPageContainer extends Component<AllProps> {
   public state = {
+    currentInterlocutor: {} as User,
     isChatSelected: false,
     isNewChat: false,
     message: '',
@@ -85,9 +90,14 @@ class MainPageContainer extends Component<AllProps> {
       return;
     }
 
-    this.props.fetchMessages({ chatId });
+    const participants = this.props.chats.data.find((chat: Chat) => chat._id === chatId).participants;
+    const currentInterlocutor = participants.to._id === this.state.userId ? participants.from : participants.to;
+
+    this.props.fetchMessages({ chatId, userId: this.state.userId, isNeededToReadMessages: false });
+    this.props.clearUnreadMessages(chatId);
 
     this.setState({
+      currentInterlocutor,
       isChatSelected: true,
       selectedChat: chatId
     });
@@ -100,15 +110,19 @@ class MainPageContainer extends Component<AllProps> {
   }
 
   private sendMessage = async () => {
+    if (!this.state.message) {
+      return;
+    }
+
     let toUserId;
 
     if (this.state.isNewChat) {
       toUserId = this.state.newUserId;
     } else {
-      const currentChat = this.props.chats.data.find((chat: Chat) => chat._id === this.state.selectedChat);
-      const to = currentChat.participants.to;
-      const from = currentChat.participants.from;
-      toUserId = this.state.userId === to._id ? from._id : to._id;
+      const participants = this.props.chats.data
+        .find((chat: Chat) => chat._id === this.state.selectedChat)
+        .participants;
+      toUserId = this.state.userId === participants.to._id ? participants.from._id : participants.to._id;
     }
 
     this.props.sendMessage({
@@ -184,6 +198,7 @@ class MainPageContainer extends Component<AllProps> {
                 isChatSelected={this.state.isChatSelected}
                 isNewChat={this.state.isNewChat}
                 clearMessages={this.props.clearMessages}
+                currentInterlocutor={this.state.currentInterlocutor}
               />
             )
           }
@@ -211,6 +226,7 @@ const mapStateToProps = ({ users, chats, messages }: ApplicationState) => ({
 const mapDispatchToProps = {
   addChat,
   clearMessages,
+  clearUnreadMessages,
   fetchChats,
   fetchMessages,
   getUsers,

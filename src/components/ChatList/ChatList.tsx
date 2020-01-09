@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Search } from '@material-ui/icons';
 import classnames from 'classnames';
+import { phrases } from '../../config/phrases';
 import { SearchParamsEnum } from '../../enums';
+import { ApplicationState } from '../../store';
 import { Chat } from '../../store/chats/types';
+import { fetchMessages } from './../../store/messages/actions';
+import { MessagesState } from './../../store/messages/types';
 import { User } from './../../store/users/types';
 import { ChatListItem } from './ChatListItem/ChatListItem';
 import { SearchItem } from './SearchItem/SearchItem';
 
 import './ChatList.scss';
-import { phrases } from 'src/config/phrases';
 
 
 const styles = () => ({
@@ -23,6 +27,7 @@ const styles = () => ({
 
 interface PropsFromState {
   classes: any;
+  messages: MessagesState;
 }
 
 interface MyProps {
@@ -45,7 +50,16 @@ interface PropsFromContainer {
   onSelectChat(chatId: string): void;
 }
 
-class ChatListComponent extends Component<PropsFromContainer & PropsFromState, MyProps> {
+interface PropsFromDispatch {
+  fetchMessages: typeof fetchMessages;
+}
+
+type AllProps =
+  PropsFromContainer &
+  PropsFromState &
+  PropsFromDispatch;
+
+class ChatListComponent extends Component<AllProps, MyProps> {
   constructor(props: any) {
     super(props);
 
@@ -105,17 +119,17 @@ class ChatListComponent extends Component<PropsFromContainer & PropsFromState, M
   private setSearchParameter = (searchParameter: number) => {
     this.setState({ searchParameter });
 
-    if (searchParameter === SearchParamsEnum.Peoples && !this.state.users.length) {
+    if (searchParameter === SearchParamsEnum.People && !this.state.users.length) {
       this.props.getUsers();
     }
   }
 
   public render() {
-    const { chats, classes, userId, onSelectChat, selectedChat, isChatSelected, currentUser, addChat } = this.props;
+    const { classes, userId, onSelectChat, selectedChat, isChatSelected, addChat } = this.props;
     const chatClass = classnames('chats', { 'chats_item-selected': isChatSelected });
     const peopleSearchParameter = classnames(
       'chats__search-peoples',
-      {'chats__search-peoples_selected': this.state.searchParameter === SearchParamsEnum.Peoples}
+      {'chats__search-peoples_selected': this.state.searchParameter === SearchParamsEnum.People}
     );
     const messagesSearchParameter = classnames(
       'chats__search-messages',
@@ -136,9 +150,9 @@ class ChatListComponent extends Component<PropsFromContainer & PropsFromState, M
         <div className='chats__choose-search'>
           <div
             className={peopleSearchParameter}
-            onClick={this.setSearchParameter.bind(this, SearchParamsEnum.Peoples)}
+            onClick={this.setSearchParameter.bind(this, SearchParamsEnum.People)}
           >
-            peoples
+            people
           </div>
           <div
             className={messagesSearchParameter}
@@ -151,19 +165,20 @@ class ChatListComponent extends Component<PropsFromContainer & PropsFromState, M
         <div className='chats__container'>
           {
             this.state.searchParameter === SearchParamsEnum.Messages
-              ? ( this.state.sortedChats.map((chat: Chat) => (
-                    <ChatListItem
-                      key={chat.chatId}
-                      userId={userId || null}
-                      text={chat.lastMessageText}
-                      time={chat.lastMessageTime}
-                      chat={chat}
-                      isSelected={selectedChat === chat._id}
-                      count={6}
-                      avatar='https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg'
-                      onSelectChat={onSelectChat.bind(this, chat._id)}
-                    />
-                )))
+              ? ( this.state.sortedChats.map((chat: Chat) => {
+                return (
+                  <ChatListItem
+                    key={chat.chatId}
+                    userId={userId || null}
+                    text={chat.lastMessageText}
+                    time={chat.lastMessageTime}
+                    chat={chat}
+                    isSelected={selectedChat === chat._id}
+                    avatar='https://i.pinimg.com/236x/47/69/f5/4769f534b5cba3b18ba6ab2929802448--t-girls-make-up.jpg'
+                    onSelectChat={onSelectChat.bind(this, chat._id)}
+                  />
+                );
+              }))
               : ( this.state.foundUsers.map((user: Chat) => (
                   <SearchItem
                     username={user.username}
@@ -172,7 +187,7 @@ class ChatListComponent extends Component<PropsFromContainer & PropsFromState, M
                     userId={user._id}
                     addChat={addChat}
                   />
-                )))
+              )))
           }
         </div>
       </div>
@@ -180,4 +195,12 @@ class ChatListComponent extends Component<PropsFromContainer & PropsFromState, M
   }
 }
 
-export const ChatList = withStyles(styles as any)(ChatListComponent);
+const mapStateToProps = ({ messages }: ApplicationState) => ({
+  messages
+});
+
+const mapDispatchToProps = {
+  fetchMessages
+};
+
+export const ChatList = connect(mapStateToProps, mapDispatchToProps)(withStyles(styles as any)(ChatListComponent));

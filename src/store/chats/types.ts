@@ -1,11 +1,12 @@
 import { User } from '../users/types';
 
 export interface Chat extends ApiResponse {
-  id: number;
+  id: string;
   participants: Participants;
   chatId: number;
   lastMessageTime: string;
   lastMessageText: string;
+  unreadMessages: number;
 }
 
 export interface Participants {
@@ -21,7 +22,8 @@ export enum ChatsActionTypes {
   FETCH_ERROR = '@@chats/FETCH_ERROR',
   ADD_CHAT = '@@chats/ADD_CHAT',
   ADD_CHAT_SUCCESS = '@@chats/ADD_CHAT_SUCCESS',
-  CHANGE_LAST_MESSAGE = '@@chats/CHANGE_LAST_MESSAGE'
+  CHANGE_LAST_MESSAGE = '@@chats/CHANGE_LAST_MESSAGE',
+  CLEAR_UNREAD_MESSAGES = '@@chats/CLEAR_UNREAD_MESSAGES'
 }
 
 export interface ChatsState {

@@ -3,6 +3,8 @@ export interface Message extends ApiResponse {
   text: string;
   user: string;
   time: number;
+  isRead: boolean;
+  isDeleted: boolean;
 }
 
 export type ApiResponse = Record<string, any>;

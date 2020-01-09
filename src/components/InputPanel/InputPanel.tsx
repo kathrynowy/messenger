@@ -15,6 +15,12 @@ interface PropsFromContainer {
 const InputPanel: React.SFC<PropsFromContainer> = (props: any) => {
   const { onTypeMessage, message, sendMessage } = props;
 
+  const sendMessageByPressingEnter = (e: any) => {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  };
+
   return (
     <div className='input-panel'>
       <SentimentSatisfiedAltOutlined className='input-panel__icon'/>
@@ -23,6 +29,7 @@ const InputPanel: React.SFC<PropsFromContainer> = (props: any) => {
         placeholder={phrases.messagePlaceholder}
         className='input-panel__input'
         onChange={onTypeMessage}
+        onKeyDown={sendMessageByPressingEnter}
         value={message}
       />
       <SendOutlined className='input-panel__icon' onClick={sendMessage}/>

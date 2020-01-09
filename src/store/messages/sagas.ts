@@ -7,10 +7,13 @@ import { fetchError, fetchSuccess, sendSuccess, sendToNewChatSuccess } from './a
 import { MessagesActionTypes } from './types';
 
 
-function* handleFetch(actionData: AnyAction) {
+function* getMessages(actionData: AnyAction) {
   try {
-    const { chatId } = actionData.payload;
-    const { data } = yield call(() => axios.get(`message/all?chatId=${chatId}`));
+    const { chatId, userId } = actionData.payload;
+    const isNeededToReadMessages = actionData.payload.isNeededToReadMessages === undefined;
+    const { data } = yield call(() =>
+      axios.get(`message/all?chatId=${chatId}&user=${userId}&isNeededToReadMessages=${!isNeededToReadMessages}`)
+    );
 
     yield put(fetchSuccess(data));
   } catch (err) {
@@ -50,7 +53,7 @@ function* sendMessage(actionData: AnyAction) {
 }
 
 function* watchFetchRequest() {
-  yield takeEvery(MessagesActionTypes.FETCH_MESSAGES, handleFetch);
+  yield takeEvery(MessagesActionTypes.FETCH_MESSAGES, getMessages);
 }
 
 function* watchMessageSending() {

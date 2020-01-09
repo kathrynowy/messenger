@@ -5,7 +5,9 @@ import { ApplicationState } from '../../store';
 import { withStyles } from '@material-ui/core/styles';
 import { Lock, PermIdentity } from '@material-ui/icons';
 import { signIn, signUp } from '../../store/users/actions';
+
 import './LoginPage.scss';
+
 
 const styles = (theme: any) => ({
   lockIcon: {
