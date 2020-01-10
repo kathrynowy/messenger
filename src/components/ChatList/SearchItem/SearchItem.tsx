@@ -21,7 +21,7 @@ const SearchItem: React.SFC<PropsFromContainer> = (props: any) => {
       <div className='user__name'>{username}</div>
       <div className='user__add-button'>
         <Add className='user__icon'/>
-        <p className='user__add-note' onClick={() => addChat(userId)}> start messaging </p>
+        <p className='user__add-note' onClick={addChat.bind(this, userId)}> start messaging </p>
       </div>
     </div>
   );

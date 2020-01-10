@@ -10,7 +10,7 @@ function* handleFetch(actionData: AnyAction) {
     const { userId } = actionData.payload;
     const { data } = yield call(() => axios.get(`chat/all?userId=${userId}`));
 
-    yield put(fetchSuccess(data));
+    yield put(fetchSuccess(data.reverse()));
   } catch (err) {
     if (err instanceof Error) {
       yield put(fetchError(err.stack!));

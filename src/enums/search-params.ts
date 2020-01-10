@@ -1,4 +1,4 @@
 export enum SearchParamsEnum {
-  Peoples = 1,
+  People = 1,
   Messages = 2
 }

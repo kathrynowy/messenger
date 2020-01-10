@@ -29,6 +29,6 @@ const MessageComponent: React.SFC<PropsFromContainer> = (props: any) => {
       </div>
     </div>
   );
-}
+};
 
 export { MessageComponent };

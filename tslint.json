@@ -37,6 +37,18 @@
       "check-whitespace"
     ],
     "trailing-comma": false,
-    "no-consecutive-blank-lines": [true, 2]
+    "no-consecutive-blank-lines": [true, 2],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "public-static-field",
+          "protected-static-field",
+          "public-static-method",
+          "protected-static-method"
+        ],
+        "alphabetize": true
+      }
+    ]
   }
 }

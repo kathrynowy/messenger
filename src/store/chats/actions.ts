@@ -13,3 +13,5 @@ export const addChat = (usersId: string[]) => action(ChatsActionTypes.ADD_CHAT, 
 export const addChatSuccess = (data: Chat[]) => action(ChatsActionTypes.ADD_CHAT_SUCCESS, data);
 
 export const changeLastMessage = (data: any) => action(ChatsActionTypes.CHANGE_LAST_MESSAGE, data);
+
+export const clearUnreadMessages = (chatId: string) => action(ChatsActionTypes.CLEAR_UNREAD_MESSAGES, chatId);

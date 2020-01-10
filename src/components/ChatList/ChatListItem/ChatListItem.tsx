@@ -2,12 +2,13 @@ import React from 'react';
 
 import classnames from 'classnames';
 import { Chat } from '../../../store/chats/types';
+
 import './ChatListItem.scss';
+
 
 interface PropsFromContainer {
   text: string;
   avatar: string;
-  count: number;
   chat: Chat;
   time: string;
   userId: string;
@@ -16,7 +17,7 @@ interface PropsFromContainer {
 }
 
 const ChatListItem: React.SFC<PropsFromContainer> = (props: any) => {
-  const { text, time, avatar, count, userId, chat, isSelected, onSelectChat } = props;
+  const { text, time, avatar, userId, chat, isSelected, onSelectChat } = props;
   const to = chat.participants.to;
   const from = chat.participants.from;
   const username = userId === to._id ? from.username : to.username;
@@ -24,7 +25,7 @@ const ChatListItem: React.SFC<PropsFromContainer> = (props: any) => {
   const chatCountClass = classnames('chat__count', { 'chat__count_selected': isSelected });
 
   return (
-    <div className={chatClass} onClick={() => onSelectChat(chat._id)}>
+    <div className={chatClass} onClick={onSelectChat.bind(this, chat._id)}>
       <img className='chat__avatar' src={avatar}/>
 
       <div className='chat__msg-info'>
@@ -38,7 +39,10 @@ const ChatListItem: React.SFC<PropsFromContainer> = (props: any) => {
           new Date(+time).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
         }
         </div>
-        <div className={chatCountClass}>{count}</div>
+        {
+          !!chat.unreadMessages &&
+          <div className={chatCountClass}>{chat.unreadMessages}</div>
+        }
       </div>
    </div>
   );

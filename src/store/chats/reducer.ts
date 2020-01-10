@@ -34,6 +34,12 @@ const reducer: Reducer<ChatsState> = (state = initialState, action) => {
 
       return { ...state, loading: false, data: state.data };
     }
+    case ChatsActionTypes.CLEAR_UNREAD_MESSAGES: {
+      const currentChat = state.data.find((chat: Chat) => chat._id === action.payload);
+      currentChat.unreadMessages = 0;
+
+      return { ...state, loading: false, data: state.data};
+    }
     default: {
       return state;
     }

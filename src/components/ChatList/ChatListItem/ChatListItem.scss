@@ -1,28 +1,28 @@
-@import '../../../styles/variables.scss';
+@import '../../../styles/variables';
 
 
 .chat {
   display: flex;
   flex-direction: row;
   height: 65px;
-  background-color: $main-dark-background;
-  color: $main-light-gray-font-color;
   margin: 10px 0;
   padding: 15px 10px;
+  color: $main-light-gray-font-color;
+  font-family: $font-family-poppins;
+  background-color: $main-dark-background;
   border-radius: 5px;
   cursor: pointer;
-  font-family: $font-family-poppins;
 
   &_selected {
     background: $red-violet-gradient;
   }
 
   &__avatar {
-    height: 45px;
     width: 45px;
-    border-radius: 100%;
+    height: 45px;
     margin-right: 10px;
     padding-top: 5px;
+    border-radius: 100%;
   }
 
   &__msg-info {
@@ -32,17 +32,19 @@
     margin-right: 10px;
   }
 
-  &__text, &__name, &__date {
+  &__text,
+  &__name,
+  &__date {
     font-family: $font-family-poppins;
   }
 
   &__text {
-    word-break: break-word;
     max-height: 38px;
-    overflow: hidden;
-    line-height: 1.2;
-    font-size: 14px;
     margin-left: 5px;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 1.2;
+    word-break: break-word;
   }
 
   &__name {
@@ -53,25 +55,25 @@
 
   &__date {
     align-content: flex-end;
-    font-size: 12px;
-    margin-bottom: auto;
     width: 55px;
+    margin-bottom: auto;
+    font-size: 12px;
   }
 
   &__count {
     display: flex;
+    justify-content: center;
+    align-items: center;
     align-self: center;
-    border-radius: 100%;
     width: 20px;
     height: 20px;
     font-size: 14px;
     background: $red-violet-gradient;
-    justify-content: center;
-    align-items: center;
+    border-radius: 100%;
 
     &_selected {
-      background: $transparent;
       color: $transparent;
+      background: $transparent;
     }
   }
 
